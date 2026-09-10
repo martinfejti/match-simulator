@@ -21,4 +21,14 @@ public class SeasonMapper {
         );
     }
 
+    @Nonnull
+    public SeasonEntity map(@Nonnull Season season) {
+        return new SeasonEntity(
+                season.id(),
+                season.date(),
+                season.league(),
+                season.flag().code()
+        );
+    }
+
 }

@@ -1,4 +1,4 @@
-package hu.martinez.matchsimulator.saving;
+package hu.martinez.matchsimulator.selector;
 
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -21,28 +21,47 @@ public class SaveInitializerService {
 
     private final DriverManagerDataSource dataSource;
 
-    @Nonnull
-    public String saveNewGame(@Nonnull String saveName) {
+    public void saveNewGame(@Nonnull String saveName, @Nonnull String seasonName) {
 
+        // check saves directory
         var directory = new File(SAVE_DIRECTORY);
         if (!directory.exists()) {
             throw new IllegalStateException("No saves folder found!");
         }
 
+        // create new save file
         var targetPath = SAVE_DIRECTORY + saveName + ".db";
         var targetFile = new File(targetPath);
-        var masterResource = new ClassPathResource("master_template.db");
 
+        // get template for new save to clone
+        var masterResource = new ClassPathResource("database/templates/" + seasonName + ".db");
+
+        // copy template content into new save
         try {
             Files.copy(masterResource.getInputStream(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new IllegalStateException("Problem during creating new copy!", e);
         }
 
-        // 4. ÁTVÁLTÁS! Ezentúl minden Repository ebből az új fájlból olvas és ide IR
-        dataSource.setUrl("jdbc:sqlite:" + targetPath);
+        // switch to new save as database
+        var newUrl = "jdbc:sqlite:" + targetPath;
 
-        return targetPath;
+        log.debug("saveNewGame - Switch to new database URL: {}", newUrl);
+
+        dataSource.setUrl(newUrl);
+    }
+
+    public void switchDatabase(@Nonnull String saveName) {
+
+        var newUrl = "jdbc:sqlite:" + SAVE_DIRECTORY + saveName + ".db";
+
+        log.debug("switchDatabase - Switch to new database URL: {}", newUrl);
+
+        dataSource.setUrl(newUrl);
+    }
+
+    public void switchToSelectorDatabase() {
+        dataSource.setUrl("jdbc:sqlite:src/main/resources/database/selector/selector.db");
     }
 
 }

@@ -1,5 +1,6 @@
 package hu.martinez.matchsimulator.selector.save;
 
+import hu.martinez.matchsimulator.selector.season.SeasonEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,8 @@ public class SaveEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "season_id")
-    private Integer seasonId;
+    @ManyToOne
+    @JoinColumn(name = "season_id", nullable = false)
+    private SeasonEntity season;
 
 }

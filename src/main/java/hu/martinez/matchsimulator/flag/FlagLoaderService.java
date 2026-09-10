@@ -15,7 +15,7 @@ public class FlagLoaderService {
         try {
             var file = new ClassPathResource("static/flag/" + code + ".png");
 
-            return new Flag(file.getFilename(), file.getInputStream().readAllBytes());
+            return new Flag(code, file.getInputStream().readAllBytes());
         } catch (IOException e) {
             throw new IllegalStateException("Unexpected error during flag loading!", e);
         }
