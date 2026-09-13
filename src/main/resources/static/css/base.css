@@ -1,0 +1,85 @@
+body {
+    background-image: url('/images/background.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1a1a1a;
+}
+
+.main-container {
+    width: 1000px;             /* Fix 1000px szélesség */
+    margin: 0 auto;            /* Teteje a képernyőhöz tapad (0), vízszintesen középre zárt (auto) */
+    background-color: #ffffff; /* Fehér háttérszín */
+
+    /* Dinamikus magasság beállítása */
+    /* min-height: 100vh;         /* Legalább a képernyő teljes magasságát kitölti */
+    height: auto;              /* Dinamikusan nyúlik, ha a tartalom több lesz */
+
+    /* Belső margó, hogy a tartalom ne tapadjon a konténer széléhez */
+    padding: 20px;
+    box-sizing: border-box;    /* A padding beleszámít a 1000px szélességbe */
+
+    /* Opcionális: Árnyék a szélekre a jobb elkülönülésért */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Kék sormenü a konténer tetején */
+.navbar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    border-radius: 8px;
+    border: 1px solid #003366;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Menüpontok listája */
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+/* Menü hivatkozások stílusa (fehér betűk) */
+.nav-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 10px;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+/* Sárga hover hatás egérfölé-vitelkor */
+.nav-menu li a:hover {
+    color: #ffeb3b;
+    text-decoration: none;
+}
+
+.content {
+    margin-top: 15px;
+    background-color: #ffffff;
+
+    /* VASTAGABB, VILÁGOSKÉK KERET:
+       A vastagság 3px-re növelve, a szín pedig megegyezik a menü tetejének világoskékjével (#1e90ff) */
+    border: 3px solid #1e90ff;
+    border-radius: 8px;
+
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #1a4b8c; /* Sötétkék betűszín */
+}
+
+/* Címsorok a content blokkon belül */
+.content h1,
+.content h2,
+.content h3 {
+    color: #003366;
+    margin-top: 0;
+    border-bottom: 2px solid #1e90ff; /* Illeszkedő elválasztó vonal */
+    padding-bottom: 8px;
+}
