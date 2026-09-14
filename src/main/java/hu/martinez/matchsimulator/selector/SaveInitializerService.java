@@ -61,6 +61,9 @@ public class SaveInitializerService {
     }
 
     public void switchToSelectorDatabase() {
+
+        log.debug("switchToSelectorDatabase - Switch to selector database");
+
         dataSource.setUrl("jdbc:sqlite:src/main/resources/database/selector/selector.db");
     }
 

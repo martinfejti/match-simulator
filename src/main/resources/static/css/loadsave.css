@@ -1,0 +1,49 @@
+/* A táblázat külső konténere (kék border és lekerekítés) */
+.table-container {
+    margin-top: 20px;
+    border: 3px solid #1e90ff;            /* Ugyanolyan világoskék keret, mint a content blokknál */
+    border-radius: 8px;
+    overflow: hidden;                     /* Biztosítja, hogy a sarkoknál a fejléc se lógjon ki */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Vékony kék sáv a táblázat felett, sárga szöveggel */
+.table-header-bar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffeb3b;                       /* Sárga szövegszín */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #003366;
+}
+
+/* Első oszlop: Save Name helyigénye */
+.custom-table .col-savename {
+    width: 200px;
+    color: #003366;
+}
+
+/* Dátum oszlop szűkítése */
+.custom-table .col-season {
+    width: 110px;
+    white-space: nowrap;
+}
+
+/* Zászló oszlop szűkítése a tartalomhoz */
+.custom-table .col-flag {
+    width: 1%;
+    padding-right: 4px;
+    white-space: nowrap;
+}
+
+/* Liga oszlop: elfoglalja a maradék helyet */
+.custom-table .col-league {
+    width: auto;
+}
+
+/* Gomb oszlop szűkítése */
+.custom-table .col-action {
+    width: 1%;
+    white-space: nowrap;
+}

@@ -69,6 +69,11 @@ public class SaveService {
     }
 
     @Nonnull
+    public void revertToSelectorDatabase() {
+        saveInitializerService.switchToSelectorDatabase();
+    }
+
+    @Nonnull
     private String getConcattedSeasonNameForSaving(@Nonnull Season season) {
         return season.date().replace("-", "_")
                 + "_"
