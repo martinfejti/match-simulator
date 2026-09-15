@@ -12,9 +12,9 @@
         <!-- Fejléc sormenü a konténer tetején -->
         <nav class="navbar">
             <ul class="nav-menu">
-                <li><a href="<c:url value='/mainmenu'/>" class="active">Main Menu</a></li>
-                <li><a href="<c:url value='/mainmenu/go-to-create-new-season'/>">New Season</a></li>
-                <li><a href="<c:url value='/mainmenu/go-to-load-season'/>">Load Season</a></li>
+                <li><a href="<c:url value='/menubar'/>" class="active">Main Menu</a></li>
+                <li><a href="<c:url value='/menubar/go-to-create-new-season'/>">New Season</a></li>
+                <li><a href="<c:url value='/menubar/go-to-load-season'/>">Load Season</a></li>
             </ul>
         </nav>
 

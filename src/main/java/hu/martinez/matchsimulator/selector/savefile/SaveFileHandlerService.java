@@ -1,4 +1,4 @@
-package hu.martinez.matchsimulator.selector;
+package hu.martinez.matchsimulator.selector.savefile;
 
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Log4j2
 @RequiredArgsConstructor
 @Service
-public class SaveInitializerService {
+public class SaveFileHandlerService {
 
     private static final String SAVE_DIRECTORY = "saves/";
 
@@ -65,6 +66,21 @@ public class SaveInitializerService {
         log.debug("switchToSelectorDatabase - Switch to selector database");
 
         dataSource.setUrl("jdbc:sqlite:src/main/resources/database/selector/selector.db");
+    }
+
+    public void deleteDatabase(@Nonnull String saveName) {
+
+        try {
+            var targetPath = Paths.get(SAVE_DIRECTORY + saveName + ".db");
+
+            log.debug("deleteDatabase - Full name of save file to delete: {}", targetPath);
+
+            var successfulDelete = Files.deleteIfExists(targetPath);
+
+            log.debug("deleteDatabase - Delete was successful: {}", successfulDelete);
+        } catch (IOException e) {
+            log.error("deleteDatabase - Unexpected error during save file delete!", e);
+        }
     }
 
 }

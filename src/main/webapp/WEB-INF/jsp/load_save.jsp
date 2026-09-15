@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <title>Load saved game</title>
     <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/newsave.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/season_selector.css'/>">
 </head>
 <body>
     <div class="main-container">
         <!-- Fejléc sormenü a konténer tetején -->
         <nav class="navbar">
             <ul class="nav-menu">
-                <li><a href="<c:url value='/mainmenu'/>">Main Menu</a></li>
-                <li><a href="<c:url value='/mainmenu/go-to-create-new-season'/>">New Season</a></li>
+                <li><a href="<c:url value='/menubar'/>">Main Menu</a></li>
+                <li><a href="<c:url value='/menubar/go-to-create-new-season'/>">New Season</a></li>
                 <li><a href="#" class="active">Load Season</a></li>
             </ul>
         </nav>
@@ -41,6 +41,7 @@
                         <th class="col-flag">Country</th>
                         <th class="col-league">League</th>
                         <th class="col-action text-end"></th>
+                        <th class="col-action text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,18 +54,27 @@
                                 <c:out value="${save.season().date()}"/>
                             </td>
                             <td class="col-flag">
-                                    <img src="<c:url value='/flag/${save.season().flag().code()}.png'/>" 
-                                         alt="Flag" 
+                                    <img src="<c:url value='/flag/${save.season().flag()}.png'/>"
+                                         alt="${save.season().flag()}" 
                                          class="flag-icon" />
                             </td>
                             <td class="col-league">
                                 <c:out value="${save.season().league()}"/>
                             </td>
                             <td class="col-action text-end">
-                                <c:url var="loadSaveUrl" value='/mainmenu/open-save'>
+                                <c:url var="loadSaveUrl" value='/selector/save/open-save'>
                                     <c:param name="saveId" value="${save.id()}"/>
                                 </c:url>
                                 <a href="${loadSaveUrl}" class="table-btn">Load</a>
+                            </td>
+                            <td class="col-action text-end">
+                                <form action="<c:url value='/selector/save/delete-save'/>"
+                                    method="post"
+                                    class="table-form"
+                                    onsubmit="return confirm('Are you sure you want to delete the save file \'${save.name()}\'?');">
+                                    <input type="hidden" name="saveId" value="${save.id()}" />
+                                    <button type="submit" class="table-btn btn-delete">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>

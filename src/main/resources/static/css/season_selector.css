@@ -74,6 +74,7 @@
     display: inline-block;
     background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
     color: #ffffff;                    /* Fehér betűszín alapértelmezetten */
+    font: inherit;
     font-weight: bold;
     font-size: 12px;
     padding: 5px 12px;
@@ -94,4 +95,11 @@
 /* Opcionális: finom gombnyomás hatás kattintáskor */
 .table-btn:active {
     transform: translateY(1px);
+}
+
+/* A táblázatban lévő formok alaphelyzetbe állítása, hogy ne csúsztassák el a cellát */
+.table-form {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
 }

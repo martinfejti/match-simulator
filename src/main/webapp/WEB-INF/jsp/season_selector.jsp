@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <title>Create new save</title>
     <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/newsave.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/season_selector.css'/>">
 </head>
 <body>
     <div class="main-container">
         <!-- Fejléc sormenü a konténer tetején -->
         <nav class="navbar">
             <ul class="nav-menu">
-                <li><a href="<c:url value='/mainmenu'/>" class="active">Main Menu</a></li>
-                <li><a href="<c:url value='/mainmenu/go-to-load-season'/>">Load Season</a></li>
+                <li><a href="<c:url value='/menubar'/>" class="active">Main Menu</a></li>
+                <li><a href="<c:url value='/menubar/go-to-load-season'/>">Load Season</a></li>
             </ul>
         </nav>
 
@@ -46,9 +46,12 @@
                 <tr>
                     <td>${season.date()}</td>
                     <td>${season.league()}</td>
-                    <td><img src="<c:url value='/flag/${season.flag().code()}.png'/>" alt="EN" class="flag-icon"></td>
+                    <td><img src="<c:url value='/flag/${season.flag()}.png'/>" alt="${season.flag()}" class="flag-icon"></td>
                     <td class="text-end">
-                        <a href="<c:url value='/mainmenu/go-to-create-new-season'/>" class="table-btn">Select</a>
+                        <c:url var="goToCreateNewSaveUrl" value='/menubar/go-to-create-new-save'>
+                            <c:param name="seasonId" value="${season.id()}"/>
+                        </c:url>
+                        <a href="${goToCreateNewSaveUrl}" class="table-btn">Select</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -57,7 +60,7 @@
                 <td>Premier League</td>
                 <td><img src="<c:url value='/flag/eng.png'/>" alt="EN" class="flag-icon"></td>
                 <td class="text-end">
-                    <a href="<c:url value='/mainmenu/go-to-create-new-season'/>" class="table-btn">Select</a>
+                    <a href="<c:url value='/menubar/go-to-create-new-save'/>" class="table-btn">Select</a>
                 </td>
             </tr>
             <tr>
@@ -65,7 +68,7 @@
                 <td>La Liga</td>
                 <td><img src="<c:url value='/flag/esp.png'/>" alt="ES" class="flag-icon"></td>
                 <td class="text-end">
-                    <a href="<c:url value='/mainmenu/go-to-create-new-season'/>" class="table-btn">Select</a>
+                    <a href="<c:url value='/menubar/go-to-create-new-save'/>" class="table-btn">Select</a>
                 </td>
             </tr>
             <tr>
@@ -73,7 +76,7 @@
                 <td>Ligue 1</td>
                 <td><img src="<c:url value='/flag/fra.png'/>" alt="DE" class="flag-icon"></td>
                 <td class="text-end">
-                    <a href="<c:url value='/mainmenu/go-to-create-new-season'/>" class="table-btn">Select</a>
+                    <a href="<c:url value='/menubar/go-to-create-new-save'/>" class="table-btn">Select</a>
                 </td>
             </tr>
         </tbody>

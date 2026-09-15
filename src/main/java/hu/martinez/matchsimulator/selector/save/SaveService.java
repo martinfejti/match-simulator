@@ -1,6 +1,6 @@
 package hu.martinez.matchsimulator.selector.save;
 
-import hu.martinez.matchsimulator.selector.SaveInitializerService;
+import hu.martinez.matchsimulator.selector.savefile.SaveFileHandlerService;
 import hu.martinez.matchsimulator.selector.season.Season;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class SaveService {
 
-    private final SaveInitializerService saveInitializerService;
+    private final SaveFileHandlerService saveFileHandlerService;
     private final SaveMapper saveMapper;
     private final SaveRepository saveRepository;
 
@@ -27,13 +27,6 @@ public class SaveService {
     }
 
     @Nonnull
-    public Save getSaveById(@Nonnull Integer id) {
-        return saveRepository.findById(id)
-                .map(saveMapper::map)
-                .orElseThrow();
-    }
-
-    @Nonnull
     public Save saveNewSave(@Nonnull CreateNewSave save) {
 
         var newSave = saveRepository.save(saveMapper.map(save));
@@ -41,7 +34,7 @@ public class SaveService {
         log.debug("saveNewGame - New save has been created: {}", newSave.getName());
 
         try {
-            saveInitializerService.saveNewGame(save.name(), getConcattedSeasonNameForSaving(save.season()));
+            saveFileHandlerService.saveNewGame(save.name(), getConcattedSeasonNameForSaving(save.season()));
         } catch (RuntimeException e) {
             log.error("saveNewGame - Error while creating database copy or database switch", e);
 
@@ -63,14 +56,31 @@ public class SaveService {
         if (saveToOpen.isEmpty()) {
             throw new IllegalStateException("Save does not exist!");
         }
-        saveInitializerService.switchDatabase(saveToOpen.get().getName());
+        saveFileHandlerService.switchDatabase(saveToOpen.get().getName());
 
         return saveMapper.map(saveToOpen.get());
     }
 
+    public void deleteSave(@Nonnull Integer saveId) {
+
+        var saveToDelete = saveRepository.findById(saveId);
+
+        if (saveToDelete.isEmpty()) {
+            throw new IllegalStateException("Save does not exist in database!");
+        }
+
+        log.debug("deleteSave - Delete save from database");
+
+        saveRepository.deleteById(saveId);
+
+        log.debug("deleteSave - Delete save file");
+
+        saveFileHandlerService.deleteDatabase(saveToDelete.get().getName());
+    }
+
     @Nonnull
     public void revertToSelectorDatabase() {
-        saveInitializerService.switchToSelectorDatabase();
+        saveFileHandlerService.switchToSelectorDatabase();
     }
 
     @Nonnull

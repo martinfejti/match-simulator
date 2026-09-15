@@ -1,0 +1,65 @@
+/* Konténer belső térköze */
+.save-form-padding {
+    padding: 20px;
+}
+
+/* Egy sorba rendezett input és gomb elrendezése */
+.save-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+/* Szöveges input mező stílusa */
+.save-name-input {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #1e90ff;
+    border-radius: 4px;
+    outline: none;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.save-name-input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+}
+
+/* A gomb igazítása az input sormagasságához */
+.save-btn {
+    height: 35px;
+    line-height: 23px;
+    white-space: nowrap;
+    padding: 0 20px;
+}
+
+/* Szezon részleteit megjelenítő kártya blokk */
+.season-details-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #1e90ff;
+    border-radius: 4px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #003366;
+}
+
+.detail-label {
+    font-weight: bold;
+    min-width: 110px;
+}
+
+.detail-value {
+    color: #222;
+}

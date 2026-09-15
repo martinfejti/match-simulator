@@ -22,8 +22,10 @@ public class CareerMenuController {
 
         saveService.revertToSelectorDatabase();
 
-        return "mainmenu";
+        return "main_menu";
     }
+
+    // TODO FM: new endpoint as redirect destination, that triggers the population of the new database file
 
     @GetMapping("/get-number-of-teams")
     public String getNumberOfTeams(@Nonnull Model model) {

@@ -21,6 +21,7 @@
             <!-- TODO display some important info about the current league-->
             
             <p>Number of teams in the league: ${numberOfTeams}</p>
+            <p>Save name: ${save.name()}</p>
         </div>
     </div>
 </body>

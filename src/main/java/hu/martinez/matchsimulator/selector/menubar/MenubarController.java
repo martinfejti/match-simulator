@@ -1,8 +1,7 @@
-package hu.martinez.matchsimulator.selector.mainmenu;
+package hu.martinez.matchsimulator.selector.menubar;
 
 import hu.martinez.matchsimulator.selector.save.SaveService;
 import hu.martinez.matchsimulator.selector.season.SeasonService;
-import hu.martinez.matchsimulator.team.TeamRepository;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/mainmenu")
+@RequestMapping("/menubar")
 @RequiredArgsConstructor
-public class MainMenuController {
+public class MenubarController {
 
     private final SaveService saveService;
     private final SeasonService seasonService;
-    private final TeamRepository teamRepository; // TODO temporal test only
 
     @GetMapping
     public String getMainMenu() {
-        return "mainmenu";
+        return "main_menu";
     }
 
     @GetMapping("go-to-create-new-season")
@@ -32,7 +30,7 @@ public class MainMenuController {
 
         model.addAttribute("seasonList", seasonList);
 
-        return "newsave";
+        return "season_selector";
     }
 
     @GetMapping("go-to-load-season")
@@ -42,18 +40,17 @@ public class MainMenuController {
 
         model.addAttribute("saveList", saveList);
 
-        return "loadsave";
+        return "load_save";
     }
 
-    @GetMapping("/open-save")
-    public String openSave(@RequestParam Integer saveId, @Nonnull Model model) {
+    @GetMapping("/go-to-create-new-save")
+    public String goToCreateNewSave(@RequestParam Integer seasonId, @Nonnull Model model) {
 
-        var loadedSave = saveService.openSave(saveId);
+        var selectedSeason = seasonService.getSeasonById(seasonId);
 
-        model.addAttribute("save", loadedSave);
+        model.addAttribute("selectedSeason", selectedSeason);
 
-        // TODO Read more about RedirectAttributes! that will transfer the save data into the new database via redirect
-        return "redirect:/career/menu/get-number-of-teams";
+        return "create_save";
     }
 
 }
