@@ -1,5 +1,7 @@
 package hu.martinez.matchsimulator.career;
 
+import hu.martinez.matchsimulator.career.fixture.FixtureService;
+import hu.martinez.matchsimulator.career.schedule.ScheduleGeneratorService;
 import hu.martinez.matchsimulator.career.team.TeamService;
 import hu.martinez.matchsimulator.selector.save.SaveService;
 import jakarta.annotation.Nonnull;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class CareerMenuController {
 
+    private final FixtureService fixtureService;
     private final SaveService saveService;
+    private final ScheduleGeneratorService scheduleGeneratorService;
     private final TeamService teamService;
 
     @GetMapping("/go-back-to-main-menu")
@@ -25,14 +29,31 @@ public class CareerMenuController {
         return "main_menu";
     }
 
-    // TODO FM: new endpoint as redirect destination, that triggers the population of the new database file
+    @GetMapping("/start-new-season")
+    public String startNewSeason(@Nonnull Model model) {
 
-    @GetMapping("/get-number-of-teams")
-    public String getNumberOfTeams(@Nonnull Model model) {
+        // TODO FM: get and store the save into the copied database!
 
         var teamList = teamService.getAllTeams();
+        var fixtureListToStore = scheduleGeneratorService.generateSchedule(teamList);
+        fixtureService.storeFixtures(fixtureListToStore);
+
+        var fixtureList = fixtureService.getFixturesByMatchWeekId(1);
 
         model.addAttribute("numberOfTeams", teamList.size());
+        model.addAttribute("fixtureList", fixtureList);
+
+        return "careermenu";
+    }
+
+    @GetMapping("/open-season")
+    public String openSeason(@Nonnull Model model) {
+
+        var teamList = teamService.getAllTeams();
+        var fixtureList = fixtureService.getNextMatchWeek();
+
+        model.addAttribute("numberOfTeams", teamList.size());
+        model.addAttribute("fixtureList", fixtureList);
 
         return "careermenu";
     }

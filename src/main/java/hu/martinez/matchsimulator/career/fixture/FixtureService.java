@@ -2,10 +2,12 @@ package hu.martinez.matchsimulator.career.fixture;
 
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Log4j2
 @RequiredArgsConstructor
 @Service
 public class FixtureService {
@@ -19,6 +21,38 @@ public class FixtureService {
                 .stream()
                 .map(fixtureMapper::map)
                 .toList();
+    }
+
+    @Nonnull
+    public void storeFixtures(@Nonnull List<CreateFixture> createFixtureList) {
+
+        var fixtureListToStore = createFixtureList.stream()
+                .map(fixtureMapper::mapToEntity)
+                .toList();
+
+        log.debug("storeFixture - fixtureListToStore.size: {}", fixtureListToStore.size());
+
+        fixtureRepository.saveAll(fixtureListToStore);
+
+        log.debug("storeFixture - Fixtures are created");
+    }
+
+    @Nonnull
+    public List<Fixture> getNextMatchWeek() {
+
+        var nextMatchWeekFixtures = fixtureRepository.findNextUnfinishedMatchWeekFixtures()
+                .stream()
+                .map(fixtureMapper::map)
+                .toList();
+
+        if (nextMatchWeekFixtures.isEmpty()) {
+            return fixtureRepository.findFinalMatchWeekFixtures()
+                    .stream()
+                    .map(fixtureMapper::map)
+                    .toList();
+        }
+
+        return nextMatchWeekFixtures;
     }
 
 }

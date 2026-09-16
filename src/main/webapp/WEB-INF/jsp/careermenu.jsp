@@ -22,6 +22,13 @@
             
             <p>Number of teams in the league: ${numberOfTeams}</p>
             <p>Save name: ${save.name()}</p>
+
+            <c:if test="${not empty fixtureList}">
+                <h1>Fixtures of Match Week #${fixtureList.get(0).matchWeek()}</h1>
+                <c:forEach var="fixture" items="${fixtureList}">
+                    <p>${fixture.homeTeam().name()} vs ${fixture.awayTeam().name()}</p>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
 </body>

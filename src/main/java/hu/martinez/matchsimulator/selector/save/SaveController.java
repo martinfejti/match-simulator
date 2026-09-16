@@ -35,7 +35,7 @@ public class SaveController {
 
         redirectAttributes.addFlashAttribute("save", newSave);
 
-        return "redirect:/career/menu/get-number-of-teams";
+        return "redirect:/career/menu/start-new-season";
     }
 
     @GetMapping("/open-save")
@@ -48,7 +48,7 @@ public class SaveController {
 
         redirectAttributes.addFlashAttribute("save", loadedSave);
 
-        return "redirect:/career/menu/get-number-of-teams";
+        return "redirect:/career/menu/open-season";
     }
 
     @PostMapping("/delete-save")

@@ -34,4 +34,27 @@ public class FixtureMapper {
         );
     }
 
+    @Nonnull
+    public FixtureEntity mapToEntity(@Nonnull CreateFixture createFixture) {
+        return new FixtureEntity(
+                null,
+                createFixture.matchWeek(),
+                createFixture.matchNumberInWeek(),
+                teamMapper.mapToEntity(createFixture.homeTeam()),
+                teamMapper.mapToEntity(createFixture.awayTeam()),
+                null,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false
+        );
+    }
+
 }
