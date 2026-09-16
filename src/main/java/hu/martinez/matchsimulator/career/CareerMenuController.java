@@ -1,7 +1,7 @@
 package hu.martinez.matchsimulator.career;
 
+import hu.martinez.matchsimulator.career.team.TeamService;
 import hu.martinez.matchsimulator.selector.save.SaveService;
-import hu.martinez.matchsimulator.team.TeamRepository;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class CareerMenuController {
 
-    private final TeamRepository teamRepository;
     private final SaveService saveService;
+    private final TeamService teamService;
 
     @GetMapping("/go-back-to-main-menu")
     public String goBackToMainMenu() {
@@ -30,7 +30,7 @@ public class CareerMenuController {
     @GetMapping("/get-number-of-teams")
     public String getNumberOfTeams(@Nonnull Model model) {
 
-        var teamList = teamRepository.findAll();
+        var teamList = teamService.getAllTeams();
 
         model.addAttribute("numberOfTeams", teamList.size());
 
