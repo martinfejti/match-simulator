@@ -55,4 +55,12 @@ public class FixtureService {
         return nextMatchWeekFixtures;
     }
 
+    @Nonnull
+    public List<Fixture> getFixturesByTeamId(@Nonnull Integer teamId) {
+        return fixtureRepository.findAllByTeamId(teamId)
+                .stream()
+                .map(fixtureMapper::map)
+                .toList();
+    }
+
 }

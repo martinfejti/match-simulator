@@ -1,0 +1,200 @@
+/* ==========================================================================
+   SORSOLÁS / FIXTURES OLDAL STÍLUSAI
+   Illeszkedik a base.css és season_selector.css kereteihez és színeihez
+   ========================================================================== */
+
+/* 1. Csapatválasztó vékony doboz */
+.team-selector-container {
+    margin-top: 15px;
+    border: 3px solid #1e90ff;            /* A szezonválasztónál használt világoskék keret */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.selector-header-bar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffeb3b;                       /* Sárga szöveg a fejlécben */
+    font-weight: bold;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-bottom: 1px solid #003366;
+}
+
+.selector-body {
+    padding: 8px 12px;
+    background-color: #f9fbfe;
+}
+
+.selector-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selector-form label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #003366;                       /* Vékony, sötétkék felirat */
+}
+
+.selector-form select {
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #003366;
+    border: 1px solid #1e90ff;
+    border-radius: 4px;
+    background-color: #ffffff;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* 2. Menetrend Táblázat Konténer */
+.fixture-table-container {
+    margin-top: 15px;
+    border: 3px solid #1e90ff;            /* Ugyanolyan világoskék keret */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Vékony kék sáv sárga csapatnév kiemeléssel */
+.fixture-header-bar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #003366;
+}
+
+.fixture-header-bar .highlight-team {
+    color: #ffeb3b;                       /* Sárgával kiemelt csapatnév */
+}
+
+
+/* 3. Táblázat formázása */
+.fixture-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    color: #1a4b8c;                       /* Vékony kék betűszín */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Letisztult, nem talpas betűtípus */
+}
+
+/* Fejléc cellák */
+.fixture-table th {
+    background-color: #f0f4f9;            /* Halvány kék-szürke háttér */
+    color: #003366;                       /* Sötétkék szöveg */
+    font-weight: bold;
+    padding: 6px 12px;
+    border-bottom: 2px solid #1e90ff;    /* Világoskék elválasztó vonal */
+    font-size: 11px;
+}
+
+/* Adatcellák */
+.fixture-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #e0e8f5;    /* Finom világoskék vonal a sorok között */
+    vertical-align: middle;
+}
+
+/* Zbra csíkozás és hover effektek */
+.fixture-table tbody tr:nth-child(even) {
+    background-color: #f9fbfe;
+}
+
+.fixture-table tbody tr:hover {
+    background-color: #e8f1fd;
+}
+
+
+/* 4. Oszlopszélességek és Igazítások */
+
+/* Week: Nagyon keskeny, középre zárt oszlop */
+.fixture-table .col-week {
+    width: 1%;
+    text-align: center;
+    font-weight: bold;
+    color: #003366;
+}
+
+/* Opponent: Széles oszlop, balra igazítva */
+.fixture-table .col-opponent {
+    text-align: left;
+    font-weight: bold;
+    color: #1a4b8c;
+}
+
+/* Venue (Ikon oszlop): Névtelen, keskeny, középre zárt */
+.fixture-table .col-venue {
+    width: 1%;
+    text-align: center;
+}
+
+/* Result: Csak akkora, amekkora a tartalom, jobbra igazítva */
+.fixture-table .col-result {
+    width: 1%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/* 5. Venue Ikonok (Hazai/Vendég) */
+.venue-icon {
+    font-size: 13px;
+}
+
+/* Hazai meccs ikon: Kék */
+.venue-home {
+    color: #1e90ff;
+}
+
+/* Vendég meccs ikon: Fehér/Nagyon világos kék (sötétebb kerettel/árnyékkal a láthatóságért) */
+.venue-away {
+    color: #ffffff;
+    text-shadow: 0px 0px 2px #003366;
+}
+
+
+/* 6. Eredmények és kimenetel badge-ek (W/D/L) */
+.result-cell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.result-score {
+    font-weight: bold;
+    color: #003366;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+/* W / D / L Jelvények */
+.status-badge {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.status-w { background-color: #22c55e; } /* Zöld - Győzelem */
+.status-d { background-color: #eab308; color: #000; } /* Sárga - Döntetlen */
+.status-l { background-color: #ef4444; } /* Piros - Vereség */
+
+.upcoming-text {
+    color: #8a9bb0;
+    font-size: 12px;
+}

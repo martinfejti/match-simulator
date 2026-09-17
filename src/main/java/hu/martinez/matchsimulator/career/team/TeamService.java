@@ -21,4 +21,12 @@ public class TeamService {
                 .toList();
     }
 
+    @Nonnull
+    public Team getTeamById(@Nonnull Integer teamId) {
+        return teamMapper.map(
+                teamRepository.findById(teamId)
+                        .orElseThrow(() ->new RuntimeException("Team does not exist!"))
+        );
+    }
+
 }
