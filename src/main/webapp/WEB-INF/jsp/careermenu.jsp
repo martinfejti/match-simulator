@@ -13,6 +13,7 @@
             <ul class="nav-menu">
                 <li><a href="<c:url value='/career/menu/go-back-to-main-menu'/>">Main Menu</a></li>
                 <li><a href="<c:url value='/career/schedule/get-schedule'/>">Schedule</a></li>
+                <li><a href="<c:url value='/career/standings'/>">Standings</a></li>
             </ul>
         </nav>
         

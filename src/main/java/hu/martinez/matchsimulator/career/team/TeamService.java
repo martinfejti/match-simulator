@@ -29,4 +29,12 @@ public class TeamService {
         );
     }
 
+    @Nonnull
+    public List<Team> getOrderedTeamListForStandings() {
+        return teamRepository.findAllForStandings()
+                .stream()
+                .map(teamMapper::map)
+                .toList();
+    }
+
 }

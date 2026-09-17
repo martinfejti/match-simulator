@@ -1,11 +1,14 @@
 package hu.martinez.matchsimulator.career.fixture;
 
+import hu.martinez.matchsimulator.career.team.Team;
+import hu.martinez.matchsimulator.career.team.TeamMapper;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -14,6 +17,7 @@ public class FixtureService {
 
     private final FixtureMapper fixtureMapper;
     private final FixtureRepository fixtureRepository;
+    private final TeamMapper teamMapper;
 
     @Nonnull
     public List<Fixture> getFixturesByMatchWeekId(@Nonnull Integer matchWeekId) {
@@ -61,6 +65,15 @@ public class FixtureService {
                 .stream()
                 .map(fixtureMapper::map)
                 .toList();
+    }
+
+    @Nonnull
+    public Optional<Fixture> getLastFinishedFixtureForTeam(@Nonnull Team team) {
+
+        var lastFixture = fixtureRepository.findLastFinishedFixtureForTeam(teamMapper.mapToEntity(team));
+
+        return lastFixture.map(fixtureMapper::map);
+
     }
 
 }

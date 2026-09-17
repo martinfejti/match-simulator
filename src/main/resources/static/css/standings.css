@@ -1,0 +1,125 @@
+/* ==========================================================================
+   TABELLA / STANDINGS OLDAL STÍLUSAI
+   ========================================================================== */
+
+/* Tabella Konténer (Ugyanaz a kék keret és lekerekítés, mint a szezonválasztónál) */
+.standings-table-container {
+    margin-top: 15px;
+    border: 3px solid #1e90ff;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Vékony kék sáv sárga szöveggel */
+.standings-header-bar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffeb3b;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #003366;
+}
+
+/* A táblázat alapbeállításai */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    color: #1a4b8c;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Fejlécek */
+.standings-table th {
+    background-color: #f0f4f9;
+    color: #003366;
+    font-weight: bold;
+    padding: 7px 10px;
+    border-bottom: 2px solid #1e90ff;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* A Club fejléc balra igazítva */
+.standings-table th.col-club {
+    text-align: left;
+    text-transform: capitalize;
+}
+
+/* Cellák */
+.standings-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e0e8f5;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Zebra csíkozás és egérfölé-vitel */
+.standings-table tbody tr:nth-child(even) {
+    background-color: #f9fbfe;
+}
+
+.standings-table tbody tr:hover {
+    background-color: #e8f1fd;
+}
+
+/* OSZLOP IGAZÍTÁSOK ÉS SZÉLESSÉGEK */
+
+/* 1. Helyezés oszlop (keskeny, balra/középre igazítva) */
+.standings-table .col-pos {
+    width: 30px;
+    font-weight: bold;
+    color: #003366;
+    text-align: center;
+}
+
+/* 2. Csapatnév oszlop (Kiterjed a táblázat bal felére) */
+.standings-table .col-club {
+    text-align: left;
+    font-weight: bold;
+    color: #1a4b8c;
+    /* Nincs fix width, így elfoglalja az elérhető hely felét */
+}
+
+/* 3. Statisztikai oszlopok (Fix keskeny oszlopok) */
+.standings-table .col-stat {
+    width: 42px;
+}
+
+/* Pontszám oszlop kiemelése */
+.standings-table .col-pts {
+    font-weight: bold;
+    color: #003366;
+}
+
+/* Lőtt - Kapott gólok oszlop (GF - GA) */
+.standings-table .col-gfga {
+    width: 75px;
+    font-size: 12px;
+}
+
+/* Utolsó teljesítmény ikon oszlop (PERF) */
+.standings-table .col-perf {
+    width: 45px;
+}
+
+/* A sorsolás oldalon már használt status-badge stílus */
+.status-badge {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; /* A mintaképen látható kerek ikonokhoz */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    margin: 0 auto;
+}
+
+.status-w { background-color: #22c55e; } /* Zöld - Győzelem */
+.status-d { background-color: #eab308; color: #000; } /* Sárga - Döntetlen */
+.status-l { background-color: #ef4444; } /* Piros - Vereség */

@@ -1,11 +1,13 @@
 package hu.martinez.matchsimulator.career.fixture;
 
+import hu.martinez.matchsimulator.career.team.TeamEntity;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FixtureRepository extends JpaRepository<FixtureEntity, Integer> {
 
@@ -36,5 +38,14 @@ public interface FixtureRepository extends JpaRepository<FixtureEntity, Integer>
         ORDER BY f.matchWeek ASC
     """)
     List<FixtureEntity> findAllByTeamId(@Param("teamId") Integer teamId);
+
+    @Query("""
+        SELECT f FROM FixtureEntity f 
+        WHERE (f.homeTeam = :team OR f.awayTeam = :team) 
+          AND f.isFinished = true 
+        ORDER BY f.matchWeek DESC
+        LIMIT 1
+    """)
+    Optional<FixtureEntity> findLastFinishedFixtureForTeam(@Param("team") TeamEntity team);
 
 }
