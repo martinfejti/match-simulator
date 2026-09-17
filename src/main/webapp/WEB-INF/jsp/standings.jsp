@@ -83,6 +83,34 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Góllövőlista Konténer (Top 15 Játékos) -->
+        <div class="top-scorers-container">
+            <div class="standings-header-bar">
+                <span>Top Scorers</span>
+            </div>
+
+            <table class="scorers-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-player">Player</th>
+                        <th class="col-club">Club</th>
+                        <th class="col-goals">Goals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="player" items="${goalscorerList}" varStatus="status">
+                        <tr>
+                            <td class="col-pos">${status.index + 1}</td>
+                            <td class="col-player">${player.playerName()}</td>
+                            <td class="col-club">${player.teamName()}</td>
+                            <td class="col-goals">${player.goals()}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
