@@ -1,0 +1,241 @@
+/* ==========================================================================
+   CSAPAT KERET / SQUAD OLDAL STÍLUSAI
+   ========================================================================== */
+
+/* 1. Csapatválasztó konténer (Ugyanaz, mint a schedule.css-ben) */
+.team-selector-container {
+    margin-top: 15px;
+    border: 3px solid #1e90ff;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.selector-header-bar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffeb3b;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-bottom: 1px solid #003366;
+}
+
+.selector-body {
+    padding: 8px 12px;
+    background-color: #f9fbfe;
+}
+
+.selector-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selector-form label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.selector-form select {
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #003366;
+    border: 1px solid #1e90ff;
+    border-radius: 4px;
+    background-color: #ffffff;
+    outline: none;
+    cursor: pointer;
+}
+
+/* 2. Keret Táblázat Konténer */
+.squad-table-container {
+    margin-top: 15px;
+    border: 3px solid #1e90ff;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.squad-header-bar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #003366;
+}
+
+.squad-header-bar .highlight-team {
+    color: #ffeb3b;
+}
+
+/* 3. Táblázat Alapstílusok */
+.squad-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    color: #1a4b8c;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.squad-table th {
+    background-color: #f0f4f9;
+    color: #003366;
+    font-weight: bold;
+    padding: 6px 8px;
+    border-bottom: 2px solid #1e90ff;
+    font-size: 11px;
+    text-align: center;
+}
+
+.squad-table td {
+    padding: 5px 8px;
+    border-bottom: 1px solid #e0e8f5;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.squad-table tbody tr:nth-child(even) {
+    background-color: #f9fbfe;
+}
+
+.squad-table tbody tr:hover {
+    background-color: #e8f1fd;
+}
+
+/* Pozíció Címkék sora (Goalkeepers, Defenders, Midfielders, Forwards)
+   Egységes, sötétebb kék háttérszín a zebra csíkozás felülbírálásával */
+.squad-table tbody tr.section-header-row,
+.squad-table tbody tr.section-header-row:nth-child(even),
+.squad-table tbody tr.section-header-row:nth-child(odd),
+.squad-table tbody tr.section-header-row:hover {
+    background-color: #d0e1f9 !important; /* Egységes sötétebb kék kategória-háttér */
+}
+
+.squad-table tr.section-header-row td {
+    font-weight: bold;
+    color: #002244;
+    text-align: left;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-top: 1px solid #1e90ff;
+    border-bottom: 1px solid #1e90ff;
+    letter-spacing: 0.5px;
+}
+
+/* 4. Oszlopszélességek és Igazítások */
+
+.squad-table .col-flag {
+    width: 25px;
+    text-align: center;
+}
+
+.squad-table .col-name {
+    text-align: left;
+    font-weight: bold;
+    color: #1a4b8c;
+}
+
+.squad-table .col-stat {
+    width: 35px;
+}
+
+.squad-table .col-energy {
+    width: 65px;
+}
+
+.squad-table .col-badge {
+    width: 35px;
+}
+
+/* 5. Egyedi Elemek: Zászló, Energy, Sérülés, Eltiltás */
+
+/* Zászló méretezés */
+.fi {
+    border-radius: 2px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+}
+
+/* Energy Bar (Zöld téglalap kitöltéssel) */
+.energy-bar-container {
+    width: 50px;
+    height: 12px;
+    background-color: #d1d5db;
+    border: 1px solid #888888;
+    border-radius: 2px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.energy-bar-fill {
+    height: 100%;
+    background-color: #22c55e; /* Zöld szín */
+    transition: width 0.3s ease;
+}
+
+/* Sérülés Badge: Piros Orvosi Kereszt + Szám */
+.injury-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background-color: #dc2626;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.injury-badge i {
+    font-size: 8px;
+}
+
+/* Eltiltás Badge: Kis Piros Lap + Szám */
+.red-card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    width: 14px;
+    height: 18px;
+    border-radius: 2px;
+    margin: 0 auto;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    border: 1px solid #b91c1c;
+}
+
+/* Aprócska zászló képek méretezése (a korábbi oldal alapján) */
+.flag-icon {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Overall érték kiemelése */
+.squad-table .col-overall {
+    font-weight: 800;
+    font-size: 13px;
+    color: #002244;
+}
+
+.highlight-overall {
+    background-color: #e3f2fd;
+    padding: 2px 5px;
+    border-radius: 3px;
+    border: 1px solid #90caf9;
+    display: inline-block;
+    min-width: 20px;
+}
