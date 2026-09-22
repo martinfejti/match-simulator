@@ -54,8 +54,10 @@
             <table class="squad-table">
                 <thead>
                     <tr>
+                        <th class="col-num" title="Shirt Number">#</th>
                         <th class="col-flag"></th>
                         <th class="col-name">Name</th>
+                        <th class="col-pos-code" title="Primary Position">Pos</th>
                         <th class="col-stat" title="Overall">O</th>
                         <th class="col-stat" title="Big Chance Value">BC</th>
                         <th class="col-stat" title="Small Chance Value">SC</th>
@@ -72,7 +74,7 @@
                 <tbody>
                     <!-- KAPUSOK (Goalkeepers) -->
                     <tr class="section-header-row">
-                        <td colspan="13">Goalkeepers</td>
+                        <td colspan="15">Goalkeepers</td>
                     </tr>
                     <c:forEach var="player" items="${goalkeeperList}">
                         <c:set var="p" value="${player}" scope="request" />
@@ -81,7 +83,7 @@
 
                     <!-- VÉDŐK (Defenders) -->
                     <tr class="section-header-row">
-                        <td colspan="13">Defenders</td>
+                        <td colspan="15">Defenders</td>
                     </tr>
                     <c:forEach var="player" items="${defenderList}">
                         <c:set var="p" value="${player}" scope="request" />
@@ -90,7 +92,7 @@
 
                     <!-- KÖZÉPPÁLYÁSOK (Midfielders) -->
                     <tr class="section-header-row">
-                        <td colspan="13">Midfielders</td>
+                        <td colspan="15">Midfielders</td>
                     </tr>
                     <c:forEach var="player" items="${midfielderList}">
                         <c:set var="p" value="${player}" scope="request" />
@@ -99,7 +101,7 @@
 
                     <!-- TÁMADÓK (Forwards) -->
                     <tr class="section-header-row">
-                        <td colspan="13">Forwards</td>
+                        <td colspan="15">Forwards</td>
                     </tr>
                     <c:forEach var="player" items="${forwardList}">
                         <c:set var="p" value="${player}" scope="request" />

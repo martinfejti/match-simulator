@@ -2,11 +2,11 @@
    CSAPAT KERET / SQUAD OLDAL STÍLUSAI
    ========================================================================== */
 
-/* 1. Csapatválasztó konténer (Ugyanaz, mint a schedule.css-ben) */
+/* 1. Csapatválasztó konténer */
 .team-selector-container {
-    margin-top: 15px;
-    border: 3px solid #1e90ff;
-    border-radius: 8px;
+    margin-top: 10px;
+    border: 2px solid #1e90ff;
+    border-radius: 6px;
     overflow: hidden;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -16,31 +16,31 @@
     background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
     color: #ffeb3b;
     font-weight: bold;
-    font-size: 13px;
-    padding: 4px 12px;
+    font-size: 12px;
+    padding: 3px 10px;
     border-bottom: 1px solid #003366;
 }
 
 .selector-body {
-    padding: 8px 12px;
+    padding: 6px 10px;
     background-color: #f9fbfe;
 }
 
 .selector-form {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .selector-form label {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     color: #003366;
 }
 
 .selector-form select {
-    padding: 4px 10px;
-    font-size: 13px;
+    padding: 2px 6px;
+    font-size: 12px;
     font-weight: bold;
     color: #003366;
     border: 1px solid #1e90ff;
@@ -52,9 +52,9 @@
 
 /* 2. Keret Táblázat Konténer */
 .squad-table-container {
-    margin-top: 15px;
-    border: 3px solid #1e90ff;
-    border-radius: 8px;
+    margin-top: 10px;
+    border: 2px solid #1e90ff;
+    border-radius: 6px;
     overflow: hidden;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -64,8 +64,8 @@
     background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
     color: #ffffff;
     font-weight: bold;
-    font-size: 14px;
-    padding: 6px 12px;
+    font-size: 13px;
+    padding: 4px 10px;
     border-bottom: 1px solid #003366;
 }
 
@@ -73,153 +73,126 @@
     color: #ffeb3b;
 }
 
-/* 3. Táblázat Alapstílusok */
+/* 3. Kompakt Táblázat Alapstílusok (OSM Stílus) */
 .squad-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 11px;
     color: #1a4b8c;
     font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.1;
 }
 
 .squad-table th {
-    background-color: #f0f4f9;
+    background: linear-gradient(to bottom, #f0f4f9 0%, #dbe6f5 100%);
     color: #003366;
     font-weight: bold;
-    padding: 6px 8px;
+    padding: 3px 4px;
     border-bottom: 2px solid #1e90ff;
+    border-right: 1px solid #d0e1f9;
     font-size: 11px;
     text-align: center;
+    white-space: nowrap;
+}
+
+.squad-table th:last-child {
+    border-right: none;
 }
 
 .squad-table td {
-    padding: 5px 8px;
+    padding: 2px 4px;
     border-bottom: 1px solid #e0e8f5;
     vertical-align: middle;
     text-align: center;
+    white-space: nowrap;
 }
 
 .squad-table tbody tr:nth-child(even) {
-    background-color: #f9fbfe;
+    background-color: #f7fafc;
 }
 
 .squad-table tbody tr:hover {
-    background-color: #e8f1fd;
+    background-color: #e2eeed;
 }
 
-/* Pozíció Címkék sora (Goalkeepers, Defenders, Midfielders, Forwards)
-   Egységes, sötétebb kék háttérszín a zebra csíkozás felülbírálásával */
+/* Pozíció Címkék sora (Goalkeepers, Defenders, Midfielders, Forwards) */
 .squad-table tbody tr.section-header-row,
 .squad-table tbody tr.section-header-row:nth-child(even),
 .squad-table tbody tr.section-header-row:nth-child(odd),
 .squad-table tbody tr.section-header-row:hover {
-    background-color: #d0e1f9 !important; /* Egységes sötétebb kék kategória-háttér */
+    background: linear-gradient(to bottom, #d0e1f9 0%, #b5d1f7 100%) !important;
 }
 
 .squad-table tr.section-header-row td {
     font-weight: bold;
     color: #002244;
     text-align: left;
-    padding: 6px 12px;
-    font-size: 12px;
+    padding: 3px 8px;
+    font-size: 11px;
     border-top: 1px solid #1e90ff;
     border-bottom: 1px solid #1e90ff;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 }
 
 /* 4. Oszlopszélességek és Igazítások */
 
+.squad-table .col-num {
+    width: 22px;
+    font-weight: bold;
+}
+
 .squad-table .col-flag {
-    width: 25px;
+    width: 20px;
     text-align: center;
 }
 
 .squad-table .col-name {
     text-align: left;
     font-weight: bold;
-    color: #1a4b8c;
+    color: #0b458c;
+    padding-left: 4px;
+}
+
+.squad-table .col-pos-code {
+    width: 28px;
+    font-weight: bold;
+    color: #555555;
 }
 
 .squad-table .col-stat {
-    width: 35px;
+    width: 28px;
 }
 
 .squad-table .col-energy {
-    width: 65px;
+    width: 52px;
 }
 
 .squad-table .col-badge {
-    width: 35px;
+    width: 24px;
 }
 
-/* 5. Egyedi Elemek: Zászló, Energy, Sérülés, Eltiltás */
+/* 5. Egyedi Elemek: Mezszám, Zászló, Energy, Sérülés, Eltiltás */
+
+/* Mezszám stílus */
+.shirt-number {
+    display: inline-block;
+    background-color: #e8f1fd;
+    color: #003366;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 3px;
+    border-radius: 2px;
+    border: 1px solid #b0c4de;
+    min-width: 14px;
+}
 
 /* Zászló méretezés */
-.fi {
-    border-radius: 2px;
-    box-shadow: 0 0 1px rgba(0,0,0,0.5);
-}
-
-/* Energy Bar (Zöld téglalap kitöltéssel) */
-.energy-bar-container {
-    width: 50px;
-    height: 12px;
-    background-color: #d1d5db;
-    border: 1px solid #888888;
-    border-radius: 2px;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.energy-bar-fill {
-    height: 100%;
-    background-color: #22c55e; /* Zöld szín */
-    transition: width 0.3s ease;
-}
-
-/* Sérülés Badge: Piros Orvosi Kereszt + Szám */
-.injury-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    background-color: #dc2626;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 1px 4px;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
-.injury-badge i {
-    font-size: 8px;
-}
-
-/* Eltiltás Badge: Kis Piros Lap + Szám */
-.red-card-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ef4444;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: bold;
-    width: 14px;
-    height: 18px;
-    border-radius: 2px;
-    margin: 0 auto;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    border: 1px solid #b91c1c;
-}
-
-/* Aprócska zászló képek méretezése (a korábbi oldal alapján) */
 .flag-icon {
-    width: 20px;
-    height: 14px;
+    width: 16px;
+    height: 11px;
     object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 2px;
+    border: 1px solid #999999;
+    border-radius: 1px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -227,15 +200,80 @@
 /* Overall érték kiemelése */
 .squad-table .col-overall {
     font-weight: 800;
-    font-size: 13px;
-    color: #002244;
 }
 
 .highlight-overall {
     background-color: #e3f2fd;
-    padding: 2px 5px;
+    color: #002244;
+    padding: 1px 4px;
     border-radius: 3px;
     border: 1px solid #90caf9;
     display: inline-block;
-    min-width: 20px;
+    min-width: 18px;
+    font-size: 11px;
+}
+
+/* Energy Bar (Dinamikus Zöld / Sárga / Piros kitöltéssel) */
+.energy-bar-container {
+    width: 44px;
+    height: 9px;
+    background-color: #e0e0e0;
+    border: 1px solid #777777;
+    border-radius: 2px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.energy-bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+/* Energy állapot-színek */
+.energy-green {
+    background-color: #28a745; /* Zöld (>= 60%) */
+}
+
+.energy-yellow {
+    background-color: #ffc107; /* Sárga (30% - 59%) */
+}
+
+.energy-red {
+    background-color: #dc3545; /* Piros (< 30%) */
+}
+
+/* Sérülés Badge: Piros Orvosi Kereszt + Szám */
+.injury-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    background-color: #dc3545;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 0px 3px;
+    border-radius: 2px;
+    line-height: 12px;
+}
+
+.injury-badge i {
+    font-size: 7px;
+}
+
+/* Eltiltás Badge: Kis Piros Lap + Szám */
+.red-card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dc3545;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: bold;
+    width: 12px;
+    height: 14px;
+    border-radius: 1px;
+    margin: 0 auto;
+    border: 1px solid #a71d2a;
+    line-height: 14px;
 }

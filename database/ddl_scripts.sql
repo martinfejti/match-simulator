@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS player (
     primary_position TEXT NOT NULL,
     other_positions TEXT,                     -- Vesszővel elválasztva (pl. "CAM, RW")
     preferred_foot VARCHAR(1),                -- 'R' (Jobb), 'L' (Bal), 'B' (Mindkét lábas)
+    shirt_number INTEGER NOT NULL DEFAULT 1 CHECK (shirt_number BETWEEN 1 AND 99),
 
     -- Képességek / Erőnlét (0-100)
     overall INTEGER CHECK (overall BETWEEN 0 AND 100),

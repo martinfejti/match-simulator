@@ -2,29 +2,50 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <tr>
-    <!-- 1. Zászló (Nemzetiség - kisbetűs ISO kód, pl. hu, gb, de, br) -->
-    <td class="col-flag">
-        <img src="<c:url value='/flag/${p.nationality().toLowerCase()}.png'/>" alt="${p.nationality()}" class="flag-icon" title="${p.nationality()}">
+    <!-- 1. Mezszám (Kékes badge) -->
+    <td class="col-num">
+        <span class="shirt-number">${p.shirtNumber()}</span>
     </td>
 
-    <!-- 2. Név -->
+    <!-- 2. Zászló -->
+    <td class="col-flag">
+        <img src="<c:url value='/flag/${p.nationality()}.png'/>" alt="${p.nationality()}" class="flag-icon" title="${p.nationality()}">
+    </td>
+
+    <!-- 3. Név -->
     <td class="col-name">${p.name()}</td>
 
-    <!-- 3-5. Képességek: O, BC, SC -->
+    <!-- 4. Poszt (GK, CB, ST stb.) -->
+    <td class="col-pos-code">${p.primaryPosition()}</td>
+
+    <!-- 5. Overall (Kiemelt érték) -->
     <td class="col-stat col-overall">
         <span class="highlight-overall">${p.overall()}</span>
     </td>
+
+    <!-- 6-7. Képességek: BC, SC -->
     <td class="col-stat">${p.bigChanceFinishing()}</td>
     <td class="col-stat">${p.smallChanceFinishing()}</td>
 
-    <!-- 6. Energy Zöld Bar -->
+    <!-- 8. Energy Bar (Dinamikus színekkel: Zöld / Sárga / Piros) -->
     <td class="col-energy">
+        <c:choose>
+            <c:when test="${p.energy() >= 60}">
+                <c:set var="energyClass" value="energy-green" />
+            </c:when>
+            <c:when test="${p.energy() >= 30}">
+                <c:set var="energyClass" value="energy-yellow" />
+            </c:when>
+            <c:otherwise>
+                <c:set var="energyClass" value="energy-red" />
+            </c:otherwise>
+        </c:choose>
         <div class="energy-bar-container" title="Energy: ${p.energy()}%">
-            <div class="energy-bar-fill" style="width: ${p.energy()}%;"></div>
+            <div class="energy-bar-fill ${energyClass}" style="width: ${p.energy()}%;"></div>
         </div>
     </td>
 
-    <!-- 7. Sérülés: Piros kereszt a számmal, ha > 0 -->
+    <!-- 9. Sérülés: Piros kereszt a számmal, ha > 0 -->
     <td class="col-badge">
         <c:if test="${p.injuredFor() > 0}">
             <div class="injury-badge" title="Injured for ${p.injuredFor()} match(es)">
@@ -34,7 +55,7 @@
         </c:if>
     </td>
 
-    <!-- 8. Eltiltás: Piros lap a számmal, ha > 0 -->
+    <!-- 10. Eltiltás: Piros lap a számmal, ha > 0 -->
     <td class="col-badge">
         <c:if test="${p.excludedFor() > 0}">
             <div class="red-card-badge" title="Excluded for ${p.excludedFor()} match(es)">
@@ -43,7 +64,7 @@
         </c:if>
     </td>
 
-    <!-- 9-13. Statisztikák: MP, G, CS, YC, RC -->
+    <!-- 11-15. Statisztikák: MP, G, CS, YC, RC -->
     <td class="col-stat">${p.matchesPlayed()}</td>
     <td class="col-stat">${p.numberOfGoals()}</td>
     <td class="col-stat">${p.cleanSheets()}</td>

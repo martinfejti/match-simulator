@@ -40,6 +40,9 @@ public class PlayerEntity {
     @Column(name = "preferred_foot")
     private String preferredFoot;
 
+    @Column(name = "shirt_number")
+    private Integer shirtNumber;
+
     @Column(name = "overall")
     private Integer overall;
 

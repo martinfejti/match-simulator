@@ -9,6 +9,7 @@ public record Player(
         String primaryPosition,
         String otherPositions,
         String preferredFoot,
+        Integer shirtNumber,
         Integer overall,
         Integer bigChanceFinishing,
         Integer smallChanceFinishing,
