@@ -1,32 +1,31 @@
 /* ==========================================================================
-   LINEUP BUILDER JAVASCRIPT LOGIKA
+   KEZDŐ 11 LOGIKA - SZÉLES KÉTSOROS FORMÁTUMMAL
    ========================================================================== */
 
-// Formációk koordinátái %-ban (Top, Left) és pozíció elnevezések
 const FORMATIONS = {
     "4-3-3": [
         { pos: "GK", top: 90, left: 50 },
-        { pos: "LB", top: 72, left: 15 },
+        { pos: "LB", top: 72, left: 14 },
         { pos: "CB", top: 76, left: 38 },
         { pos: "CB", top: 76, left: 62 },
-        { pos: "RB", top: 72, left: 85 },
-        { pos: "CM", top: 48, left: 25 },
+        { pos: "RB", top: 72, left: 86 },
+        { pos: "CM", top: 48, left: 24 },
         { pos: "CM", top: 52, left: 50 },
-        { pos: "CM", top: 48, left: 75 },
+        { pos: "CM", top: 48, left: 76 },
         { pos: "LW", top: 20, left: 20 },
         { pos: "ST", top: 15, left: 50 },
         { pos: "RW", top: 20, left: 80 }
     ],
     "4-4-2": [
         { pos: "GK", top: 90, left: 50 },
-        { pos: "LB", top: 72, left: 15 },
+        { pos: "LB", top: 72, left: 14 },
         { pos: "CB", top: 76, left: 38 },
         { pos: "CB", top: 76, left: 62 },
-        { pos: "RB", top: 72, left: 85 },
-        { pos: "LM", top: 45, left: 15 },
+        { pos: "RB", top: 72, left: 86 },
+        { pos: "LM", top: 45, left: 14 },
         { pos: "CM", top: 48, left: 38 },
         { pos: "CM", top: 48, left: 62 },
-        { pos: "RM", top: 45, left: 85 },
+        { pos: "RM", top: 45, left: 86 },
         { pos: "ST", top: 18, left: 35 },
         { pos: "ST", top: 18, left: 65 }
     ],
@@ -35,56 +34,54 @@ const FORMATIONS = {
         { pos: "CB", top: 75, left: 25 },
         { pos: "CB", top: 77, left: 50 },
         { pos: "CB", top: 75, left: 75 },
-        { pos: "LWB", top: 48, left: 12 },
-        { pos: "CM", top: 50, left: 33 },
+        { pos: "LWB", top: 48, left: 10 },
+        { pos: "CM", top: 50, left: 30 },
         { pos: "CAM", top: 42, left: 50 },
-        { pos: "CM", top: 50, left: 67 },
-        { pos: "RWB", top: 48, left: 88 },
+        { pos: "CM", top: 50, left: 70 },
+        { pos: "RWB", top: 48, left: 90 },
         { pos: "ST", top: 18, left: 35 },
         { pos: "ST", top: 18, left: 65 }
     ],
     "4-2-3-1": [
         { pos: "GK", top: 90, left: 50 },
-        { pos: "LB", top: 72, left: 15 },
+        { pos: "LB", top: 72, left: 14 },
         { pos: "CB", top: 76, left: 38 },
         { pos: "CB", top: 76, left: 62 },
-        { pos: "RB", top: 72, left: 85 },
+        { pos: "RB", top: 72, left: 86 },
         { pos: "CDM", top: 56, left: 35 },
         { pos: "CDM", top: 56, left: 65 },
         { pos: "CAM", top: 35, left: 50 },
-        { pos: "LM", top: 35, left: 18 },
-        { pos: "RM", top: 35, left: 82 },
+        { pos: "LM", top: 35, left: 16 },
+        { pos: "RM", top: 35, left: 84 },
         { pos: "ST", top: 15, left: 50 }
     ],
     "5-3-2": [
         { pos: "GK", top: 90, left: 50 },
-        { pos: "LWB", top: 68, left: 12 },
-        { pos: "CB", top: 75, left: 31 },
+        { pos: "LWB", top: 68, left: 10 },
+        { pos: "CB", top: 75, left: 30 },
         { pos: "CB", top: 77, left: 50 },
-        { pos: "CB", top: 75, left: 69 },
-        { pos: "RWB", top: 68, left: 88 },
-        { pos: "CM", top: 45, left: 25 },
+        { pos: "CB", top: 75, left: 70 },
+        { pos: "RWB", top: 68, left: 90 },
+        { pos: "CM", top: 45, left: 24 },
         { pos: "CM", top: 48, left: 50 },
-        { pos: "CM", top: 45, left: 75 },
+        { pos: "CM", top: 45, left: 76 },
         { pos: "ST", top: 18, left: 35 },
         { pos: "ST", top: 18, left: 65 }
     ]
 };
 
 let activeSelectedPlayerId = null;
-let currentLineup = {}; // Map: slotIndex -> playerId
+let currentLineup = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     changeFormation();
 });
 
-// Formáció váltása és pálya újjáépítése
 function changeFormation() {
     const formationKey = document.getElementById("formationSelect").value;
     const slots = FORMATIONS[formationKey];
     const pitch = document.getElementById("pitch");
 
-    // Töröljük a meglévő slotokat, megtartva a pálya hátterét és vonalait
     const existingZones = pitch.querySelectorAll('.drop-zone');
     existingZones.forEach(zone => zone.remove());
 
@@ -96,7 +93,6 @@ function changeFormation() {
         zone.dataset.slotIndex = index;
         zone.dataset.positionRole = slot.pos;
 
-        // Drag & Drop eseményfigyelők
         zone.ondragover = allowDrop;
         zone.ondragleave = clearDragOver;
         zone.ondrop = (e) => drop(e, index);
@@ -104,7 +100,6 @@ function changeFormation() {
 
         pitch.appendChild(zone);
 
-        // Ha volt ezen a sloton játékos, rajzoljuk újra
         if (currentLineup[index]) {
             renderPlayerInSlot(index, currentLineup[index]);
         } else {
@@ -117,7 +112,6 @@ function renderPlaceholder(zone, posRole) {
     zone.innerHTML = `<span class="drop-zone-placeholder">${posRole}</span>`;
 }
 
-// Kattintás alapú kijelölések
 function selectPlayer(playerId) {
     const row = document.getElementById(`player-row-${playerId}`);
     if (!row || row.classList.contains('row-disabled')) return;
@@ -143,7 +137,6 @@ function onSlotClick(slotIndex) {
     }
 }
 
-// Drag and Drop Logika
 function allowDrop(ev) {
     ev.preventDefault();
     ev.currentTarget.classList.add('drag-over');
@@ -167,9 +160,7 @@ function drop(ev, slotIndex) {
     }
 }
 
-// Játékos hozzárendelése slot-hoz
 function assignPlayerToSlot(playerId, slotIndex) {
-    // Ha a játékos már be volt téve egy másik slotba, eltávolítjuk onnan
     for (const [sIndex, pId] of Object.entries(currentLineup)) {
         if (pId === playerId) {
             delete currentLineup[sIndex];
@@ -193,7 +184,7 @@ function removePlayerFromSlot(slotIndex, event) {
     updateSquadTableStates();
 }
 
-// Slot kirajzolása játékos kártyával
+// ITT HOZZUK LÉTRE A KÉRÉSNEK MEGFELELŐ 2 SOROS KÁRTYÁT A PÁLYÁN
 function renderPlayerInSlot(slotIndex, playerId) {
     const zone = document.querySelector(`.drop-zone[data-slot-index='${slotIndex}']`);
     const row = document.getElementById(`player-row-${playerId}`);
@@ -204,22 +195,25 @@ function renderPlayerInSlot(slotIndex, playerId) {
     zone.innerHTML = `
         <div class="placed-card">
             <div class="remove-player-btn" onclick="removePlayerFromSlot(${slotIndex}, event)">×</div>
-            <div class="placed-card-header">
+
+            <!-- 1. SOR: Mezszám, Zászló, Név -->
+            <div class="placed-card-row1">
                 <span class="shirt-number">#${pData.number}</span>
-                <span class="fi fi-${pData.flag.toLowerCase()} flag-icon"></span>
+                <img src="/flag/${pData.flag.toLowerCase()}.png" alt="${pData.flag}" class="flag-icon" title="${pData.flag}">
+                <span class="player-name" title="${pData.name}">${pData.name}</span>
             </div>
-            <div class="placed-card-body" title="${pData.name}">
-                ${pData.name}
-            </div>
-            <div class="placed-card-footer">
-                <span style="color: #555; font-weight: bold;">${pData.pos}</span>
-                <span class="highlight-overall">${pData.overall}</span>
+
+            <!-- 2. SOR: Attribútumok (Poszt, Overall, BC, SC) -->
+            <div class="placed-card-row2">
+                <span style="font-weight: bold; color: #003366;">${pData.pos}</span>
+                <span class="stat-tag">O: ${pData.overall}</span>
+                <span class="stat-tag">BC: ${pData.bc}</span>
+                <span class="stat-tag">SC: ${pData.sc}</span>
             </div>
         </div>
     `;
 }
 
-// Táblázat sorainak stílusfrissítése (szürkítés, ha már be van osztva)
 function updateSquadTableStates() {
     const assignedIds = Object.values(currentLineup);
 
@@ -233,7 +227,6 @@ function updateSquadTableStates() {
     });
 }
 
-// Mentés küldése a Backend-re (POST JSON)
 function saveLineup() {
     const lineupKeys = Object.keys(currentLineup);
     if (lineupKeys.length < 11) {

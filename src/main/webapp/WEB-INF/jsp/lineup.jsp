@@ -5,19 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Lineup Builder - ${selectedTeam.name()}</title>
-    <!-- Meglévő globális és komponens CSS-ek -->
-    <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/squad.css'/>">
+    <!-- Egyedi felületi stílus (független a base.css 1000px-es korlátjától) -->
     <link rel="stylesheet" href="<c:url value='/css/lineup.css'/>">
-    <!-- Flag Icons és FontAwesome -->
+    <!-- Flag Icons a nemzetiségi zászlókhoz -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css">
+    <!-- FontAwesome az ikonokhoz -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="main-container">
-        <!-- Változatlan kék sormenü -->
-        <nav class="navbar">
-            <ul class="nav-menu">
+    <div class="lineup-page-wrapper">
+        <!-- Fejléc / Menü bar -->
+        <nav class="lineup-navbar">
+            <ul class="lineup-nav-menu">
                 <li><a href="<c:url value='/career/menu/go-back-to-main-menu'/>">Main Menu</a></li>
                 <li><a href="<c:url value='/career/menu/open-season'/>">Career Menu</a></li>
                 <li><a href="<c:url value='/career/standings'/>">Standings</a></li>
@@ -29,8 +28,8 @@
         <input type="hidden" id="fixtureId" value="${fixtureId}" />
         <input type="hidden" id="teamId" value="${selectedTeam.id()}" />
 
-        <!-- Fő kétoszlopos munkaterület -->
-        <div class="lineup-builder-workspace">
+        <!-- Fő széles munkaterület -->
+        <div class="lineup-workspace">
 
             <!-- BAL OSZLOP: Kompakt Játékoslista -->
             <div class="lineup-card squad-panel">
@@ -38,7 +37,7 @@
                     <span>Squad - <span class="highlight-yellow">${selectedTeam.name()}</span></span>
                 </div>
                 <div class="lineup-card-body squad-table-scroll">
-                    <table class="squad-table lineup-squad-table" id="playerTable">
+                    <table class="lineup-squad-table" id="playerTable">
                         <thead>
                             <tr>
                                 <th class="col-num" title="Shirt Number">#</th>
@@ -46,6 +45,8 @@
                                 <th class="col-name">Name</th>
                                 <th class="col-pos-code" title="Primary Position">Pos</th>
                                 <th class="col-stat" title="Overall">O</th>
+                                <th class="col-stat" title="Big Chance Value">BC</th>
+                                <th class="col-stat" title="Small Chance Value">SC</th>
                                 <th class="col-energy">Energy</th>
                                 <th class="col-badge" title="Status">St</th>
                             </tr>
@@ -53,7 +54,7 @@
                         <tbody>
                             <!-- KAPUSOK -->
                             <tr class="section-header-row">
-                                <td colspan="7">Goalkeepers</td>
+                                <td colspan="9">Goalkeepers</td>
                             </tr>
                             <c:forEach var="player" items="${goalkeeperList}">
                                 <c:set var="p" value="${player}" scope="request" />
@@ -62,7 +63,7 @@
 
                             <!-- VÉDŐK -->
                             <tr class="section-header-row">
-                                <td colspan="7">Defenders</td>
+                                <td colspan="9">Defenders</td>
                             </tr>
                             <c:forEach var="player" items="${defenderList}">
                                 <c:set var="p" value="${player}" scope="request" />
@@ -71,7 +72,7 @@
 
                             <!-- KÖZÉPPÁLYÁSOK -->
                             <tr class="section-header-row">
-                                <td colspan="7">Midfielders</td>
+                                <td colspan="9">Midfielders</td>
                             </tr>
                             <c:forEach var="player" items="${midfielderList}">
                                 <c:set var="p" value="${player}" scope="request" />
@@ -80,7 +81,7 @@
 
                             <!-- TÁMADÓK -->
                             <tr class="section-header-row">
-                                <td colspan="7">Forwards</td>
+                                <td colspan="9">Forwards</td>
                             </tr>
                             <c:forEach var="player" items="${forwardList}">
                                 <c:set var="p" value="${player}" scope="request" />
@@ -91,7 +92,7 @@
                 </div>
             </div>
 
-            <!-- JOBB OSZLOP: Taktikai Pálya és Vezérlés -->
+            <!-- JOBB OSZLOP: Taktikai Pálya (Kiszélesítve) -->
             <div class="lineup-card pitch-panel">
                 <div class="lineup-card-header pitch-header-controls">
                     <div class="formation-selector-group">
@@ -117,7 +118,7 @@
                         <div class="pitch-line center-circle"></div>
                         <div class="pitch-line center-line"></div>
 
-                        <!-- Ide kerülnek dinamikusan a kártyák a JavaScript segítségével -->
+                        <!-- A kártyák a JavaScript által dinamikusan töltődnek be ide -->
                     </div>
                 </div>
             </div>

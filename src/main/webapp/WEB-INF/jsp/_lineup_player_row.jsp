@@ -13,6 +13,8 @@
     data-number="${p.shirtNumber()}"
     data-pos="${p.primaryPosition()}"
     data-overall="${p.overall()}"
+    data-bc="${p.bigChanceFinishing()}"
+    data-sc="${p.smallChanceFinishing()}"
     data-flag="${p.nationality()}">
 
     <!-- Mezszám -->
@@ -22,7 +24,9 @@
 
     <!-- Zászló -->
     <td class="col-flag">
-        <span class="fi fi-${p.nationality().toLowerCase()} flag-icon"></span>
+        <!-- <span class="flag-icon"> -->
+            <img src="<c:url value='/flag/${p.nationality()}.png'/>" alt="${p.nationality()}" class="flag-icon" title="${p.nationality()}">
+        <!-- </span> -->
     </td>
 
     <!-- Név -->
@@ -40,6 +44,16 @@
         <span class="highlight-overall">${p.overall()}</span>
     </td>
 
+    <!-- Big Chance (BC) -->
+    <td class="col-stat">
+        ${p.bigChanceFinishing()}
+    </td>
+
+    <!-- Small Chance (SC) -->
+    <td class="col-stat">
+        ${p.smallChanceFinishing()}
+    </td>
+
     <!-- Energy bar -->
     <td class="col-energy">
         <div class="energy-bar-container" title="Energy: ${p.energy()}%">
@@ -48,7 +62,7 @@
         </div>
     </td>
 
-    <!-- Sérülés / Eltiltás jelzés -->
+    <!-- Sérülés / Eltiltás badge -->
     <td class="col-badge">
         <c:choose>
             <c:when test="${p.injuredFor() > 0}">
