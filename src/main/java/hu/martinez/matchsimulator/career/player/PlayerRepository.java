@@ -8,6 +8,13 @@ import java.util.List;
 
 public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
 
+    @Query("""
+        SELECT p FROM PlayerEntity p 
+        WHERE p.teamId = :teamId 
+        ORDER BY p.overall ASC
+    """)
+    List<PlayerEntity> findPlayersByTeamId(@Param("teamId") Integer teamId);
+
     // 1. KAPUSOK (Goalkeepers)
     @Query("""
         SELECT p FROM PlayerEntity p 
