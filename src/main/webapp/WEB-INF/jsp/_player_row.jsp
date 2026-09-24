@@ -13,7 +13,14 @@
     </td>
 
     <!-- 3. Név -->
-    <td class="col-name">${p.name()}</td>
+    <c:choose>
+        <c:when test="${empty p.firstName()}">
+            <td class="col-name">${p.lastName()}</td>
+        </c:when>
+        <c:otherwise>
+            <td class="col-name">${p.firstName()} ${p.lastName()}</td>
+        </c:otherwise>
+    </c:choose>
 
     <!-- 4. Poszt (GK, CB, ST stb.) -->
     <td class="col-pos-code">${p.primaryPosition()}</td>

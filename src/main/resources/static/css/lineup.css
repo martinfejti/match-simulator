@@ -127,7 +127,7 @@ body {
 .lineup-squad-table td {
     padding: 3px 4px;
     border-bottom: 1px solid #e0e8f5;
-    text-align: center;
+    /* text-align: center; */
     white-space: nowrap;
 }
 

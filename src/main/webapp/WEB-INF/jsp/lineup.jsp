@@ -128,7 +128,7 @@
 
     <!-- SCRIPT BETÖLTÉS -->
     <script>
-        const SAVE_URL = "<c:url value='/career/lineup/save'/>";
+        const SAVE_URL = "/career/lineup/save-lineup";
     </script>
     <script src="<c:url value='/js/lineup.js'/>"></script>
 </body>

@@ -235,6 +235,7 @@ function saveLineup() {
 
     const fixtureId = document.getElementById("fixtureId").value;
     const teamId = document.getElementById("teamId").value;
+    const formationSelect = document.getElementById("formationSelect").value;
 
     const payload = [];
 
@@ -250,19 +251,28 @@ function saveLineup() {
         });
     }
 
+    const createLineup = {
+        formation: formationSelect,
+        starterPlayerList: payload
+    };
+
     fetch(SAVE_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(createLineup)
     })
     .then(response => {
         if (response.ok) {
             alert("A kezdő 11 sikeresen elmentve!");
+            return response.json();
         } else {
             alert("Hiba történt a mentés során!");
         }
+    })
+    .then(data => {
+        window.location.href = data.redirectUrl;
     })
     .catch(error => {
         console.error("Error saving lineup:", error);

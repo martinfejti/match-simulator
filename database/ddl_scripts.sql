@@ -43,7 +43,8 @@ CREATE TABLE fixture (
 
 CREATE TABLE IF NOT EXISTS player (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
     team_id INTEGER NOT NULL,
     nationality TEXT,
     age INTEGER,

@@ -20,7 +20,7 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
         SELECT p FROM PlayerEntity p 
         WHERE p.teamId = :teamId 
           AND p.primaryPosition = 'GK'
-        ORDER BY p.name ASC
+        ORDER BY p.lastName ASC
     """)
     List<PlayerEntity> findGoalkeepersByTeamId(@Param("teamId") Integer teamId);
 
@@ -29,7 +29,7 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
         SELECT p FROM PlayerEntity p 
         WHERE p.teamId = :teamId 
           AND p.primaryPosition IN ('CB', 'RB', 'LB', 'RWB', 'LWB')
-        ORDER BY p.name ASC
+        ORDER BY p.lastName ASC
     """)
     List<PlayerEntity> findDefendersByTeamId(@Param("teamId") Integer teamId);
 
@@ -38,7 +38,7 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
         SELECT p FROM PlayerEntity p 
         WHERE p.teamId = :teamId 
           AND p.primaryPosition IN ('CDM', 'CM', 'CAM', 'LM', 'RM')
-        ORDER BY p.name ASC
+        ORDER BY p.lastName ASC
     """)
     List<PlayerEntity> findMidfieldersByTeamId(@Param("teamId") Integer teamId);
 
@@ -47,7 +47,7 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
         SELECT p FROM PlayerEntity p 
         WHERE p.teamId = :teamId 
           AND p.primaryPosition IN ('ST', 'LW', 'RW')
-        ORDER BY p.name ASC
+        ORDER BY p.lastName ASC
     """)
     List<PlayerEntity> findForwardsByTeamId(@Param("teamId") Integer teamId);
 

@@ -2,7 +2,8 @@ package hu.martinez.matchsimulator.career.player;
 
 public record Player(
         Integer id,
-        String name,
+        String firstName,
+        String lastName,
         Integer teamId,
         String nationality,
         Integer age,

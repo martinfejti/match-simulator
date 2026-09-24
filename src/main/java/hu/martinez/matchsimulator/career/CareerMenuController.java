@@ -21,6 +21,18 @@ public class CareerMenuController {
     private final ScheduleGeneratorService scheduleGeneratorService;
     private final TeamService teamService;
 
+    @GetMapping
+    public String displayCareerMenu(@Nonnull Model model) {
+
+        var teamList = teamService.getAllTeams();
+        var fixtureList = fixtureService.getNextMatchWeek();
+
+        model.addAttribute("numberOfTeams", teamList.size());
+        model.addAttribute("fixtureList", fixtureList);
+
+        return "careermenu";
+    }
+
     @GetMapping("/go-back-to-main-menu")
     public String goBackToMainMenu() {
 
