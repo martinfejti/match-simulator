@@ -3,6 +3,7 @@ package hu.martinez.matchsimulator.career.fixture;
 import hu.martinez.matchsimulator.career.team.TeamEntity;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -47,5 +48,13 @@ public interface FixtureRepository extends JpaRepository<FixtureEntity, Integer>
         LIMIT 1
     """)
     Optional<FixtureEntity> findLastFinishedFixtureForTeam(@Param("team") TeamEntity team);
+
+    @Modifying
+    @Query("UPDATE FixtureEntity f SET f.homeFormation = :formation WHERE f.id = :fixtureId")
+    void updateHomeFormation(@Param("fixtureId") Integer fixtureId, @Param("formation") String formation);
+
+    @Modifying
+    @Query("UPDATE FixtureEntity f SET f.awayFormation = :formation WHERE f.id = :fixtureId")
+    void updateAwayFormation(@Param("fixtureId") Integer fixtureId, @Param("formation") String formation);
 
 }

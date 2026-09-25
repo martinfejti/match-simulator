@@ -10,7 +10,8 @@ public class PlayerMapper {
     public Player map(@Nonnull PlayerEntity entity) {
         return new Player(
                 entity.getId(),
-                entity.getName(),
+                entity.getFirstName(),
+                entity.getLastName(),
                 entity.getTeamId(),
                 entity.getNationality(),
                 entity.getAge(),
@@ -36,7 +37,8 @@ public class PlayerMapper {
     public Player mapToEntity(@Nonnull Player player) {
         return new Player(
                 player.id(),
-                player.name(),
+                player.firstName(),
+                player.lastName(),
                 player.teamId(),
                 player.nationality(),
                 player.age(),

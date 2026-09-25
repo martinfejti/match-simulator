@@ -23,12 +23,14 @@ CREATE TABLE fixture (
     away_score INTEGER DEFAULT 0,
 
     -- Hazai csapat statisztikák
+    home_formation TEXT,
     home_big_chances INTEGER DEFAULT 0,
     home_small_chances INTEGER DEFAULT 0,
     home_yellow_cards INTEGER DEFAULT 0,
     home_red_cards INTEGER DEFAULT 0,
 
     -- Vendég csapat statisztikák
+    away_formation TEXT,
     away_big_chances INTEGER DEFAULT 0,
     away_small_chances INTEGER DEFAULT 0,
     away_yellow_cards INTEGER DEFAULT 0,
@@ -43,7 +45,8 @@ CREATE TABLE fixture (
 
 CREATE TABLE IF NOT EXISTS player (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
     team_id INTEGER NOT NULL,
     nationality TEXT,
     age INTEGER,
@@ -71,4 +74,65 @@ CREATE TABLE IF NOT EXISTS player (
 
     -- Kapcsolat a team táblával
     FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS match_lineup (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    position TEXT NOT NULL,                  -- Az adott meccsen betöltött pozíció (pl. "GK", "CB", "ST")
+
+    -- Idegen kulcsok és törlési szabályok
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE,
+
+    -- Egy játékos egy adott meccsen csak egyszer szerepelhet a keretben
+    UNIQUE (fixture_id, player_id)
+);
+
+-- 1. GÓLOK TÁBLA
+CREATE TABLE IF NOT EXISTS goal (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,               -- Melyik csapat szerezte
+    player_id INTEGER NOT NULL,             -- Gólszerző játékos
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);
+
+-- 2. SÁRGA LAPOK TÁBLA
+CREATE TABLE IF NOT EXISTS yellow_card (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);
+
+-- 3. PIROS LAPOK TÁBLA
+CREATE TABLE IF NOT EXISTS red_card (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);
+
+-- 4. SÉRÜLÉSEK TÁBLA
+CREATE TABLE IF NOT EXISTS injury (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    missed_matches INTEGER NOT NULL DEFAULT 1, -- Hány meccset kell kihagynia
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
 );

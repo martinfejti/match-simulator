@@ -1,0 +1,374 @@
+/* ==========================================================================
+   EGYEDI KEZDŐ 11 ÉPÍTŐ STÍLUSLAP (FÜGGETLEN A BASE.CSS-TŐL)
+   ========================================================================== */
+
+body {
+    background-image: url('/images/background.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.lineup-page-wrapper {
+    width: 95%; /* Megnyitott szélesség a teljes képernyő kihasználásához */
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Navigációs sáv */
+.lineup-navbar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    border-radius: 8px;
+    border: 1px solid #003366;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.lineup-nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.lineup-nav-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 10px;
+    display: inline-block;
+}
+
+.lineup-nav-menu li a:hover {
+    color: #ffeb3b;
+}
+
+/* Munkaterület elrendezése */
+.lineup-workspace {
+    display: flex;
+    gap: 15px;
+    height: calc(100vh - 100px);
+    min-height: 650px;
+}
+
+.lineup-card {
+    border: 2px solid #1e90ff;
+    border-radius: 6px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Bal oszlop - Kompakt méretezés a listának */
+.squad-panel {
+    flex: 0 0 460px;
+}
+
+/* Jobb oszlop - Kiszélesített Pálya */
+.pitch-panel {
+    flex: 1;
+}
+
+/* Fejlécek */
+.lineup-card-header {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #003366;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.highlight-yellow {
+    color: #ffeb3b;
+}
+
+/* Táblázat stílusai */
+.squad-table-scroll {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.lineup-squad-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    color: #1a4b8c;
+}
+
+.lineup-squad-table th {
+    background: linear-gradient(to bottom, #f0f4f9 0%, #dbe6f5 100%);
+    color: #003366;
+    font-weight: bold;
+    padding: 4px;
+    border-bottom: 2px solid #1e90ff;
+    border-right: 1px solid #d0e1f9;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.lineup-squad-table td {
+    padding: 3px 4px;
+    border-bottom: 1px solid #e0e8f5;
+    /* text-align: center; */
+    white-space: nowrap;
+}
+
+.lineup-squad-table tbody tr:nth-child(even) { background-color: #f7fafc; }
+.lineup-squad-table tbody tr:hover { background-color: #e2eeed; }
+
+.lineup-squad-table tr.section-header-row,
+.lineup-squad-table tr.section-header-row:hover {
+    background: linear-gradient(to bottom, #d0e1f9 0%, #b5d1f7 100%) !important;
+}
+
+.lineup-squad-table tr.section-header-row td {
+    font-weight: bold;
+    color: #002244;
+    text-align: left;
+    padding: 3px 8px;
+}
+
+.lineup-squad-table tr.selected-row { background-color: #ffe0b2 !important; }
+.lineup-squad-table tr.assigned-row { opacity: 0.4; background-color: #eceff1 !important; }
+.lineup-squad-table tr.row-disabled { opacity: 0.5; cursor: not-allowed; background-color: #ffebee !important; }
+
+/* Kiskomponensek */
+.shirt-number {
+    background-color: #e8f1fd;
+    color: #003366;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 2px;
+    border: 1px solid #b0c4de;
+}
+
+.flag-icon {
+    width: 16px;
+    height: 11px;
+    object-fit: cover;
+    border: 1px solid #999;
+}
+
+.highlight-overall {
+    background-color: #e3f2fd;
+    color: #002244;
+    padding: 1px 4px;
+    border-radius: 3px;
+    border: 1px solid #90caf9;
+    font-weight: bold;
+}
+
+.energy-bar-container {
+    width: 40px;
+    height: 8px;
+    background-color: #e0e0e0;
+    border: 1px solid #777;
+    margin: 0 auto;
+}
+
+.energy-bar-fill { height: 100%; }
+.energy-green { background-color: #28a745; }
+.energy-yellow { background-color: #ffc107; }
+.energy-red { background-color: #dc3545; }
+
+.injury-badge, .red-card-badge {
+    background-color: #dc3545;
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+.text-truncate {
+    max-width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Fejléc elemek és Gombok */
+.pitch-header-controls { gap: 10px; }
+
+.formation-selector-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.formation-selector-group select {
+    padding: 2px 6px;
+    font-weight: bold;
+    color: #003366;
+    border-radius: 4px;
+}
+
+.btn-save-lineup {
+    background: linear-gradient(to bottom, #28a745 0%, #1e7e34 100%);
+    color: white;
+    border: 1px solid #145a23;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-save-lineup:hover {
+    background: linear-gradient(to bottom, #34ce57 0%, #218838 100%);
+    color: #ffeb3b;
+}
+
+/* PÁLYA TERÜLET GIGANTIKUS ÉS SZÉLES */
+.pitch-container-body {
+    flex: 1;
+    background-color: #111;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.football-pitch {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #2e7d32 0%, #1b5e20 100%);
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    position: relative;
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.pitch-line {
+    position: absolute;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+}
+
+.center-line { top: 50%; left: 0; width: 100%; }
+.center-circle { top: 50%; left: 50%; width: 100px; height: 100px; border-radius: 50%; transform: translate(-50%, -50%); }
+.penalty-area-top { top: 0; left: 50%; width: 220px; height: 80px; transform: translateX(-50%); border-top: none; }
+.goal-area-top { top: 0; left: 50%; width: 90px; height: 30px; transform: translateX(-50%); border-top: none; }
+
+/* DÁTUM / POZÍCIÓ SLOTOK (SZÉLESEBB DOBOZOK) */
+.drop-zone {
+    position: absolute;
+    width: 150px;  /* Szélesebb méret a kért 2 soros tartalomhoz */
+    height: 52px;  /* Megfelelő magasság a 2 sorhoz */
+    transform: translate(-50%, -50%);
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.drop-zone:hover, .drop-zone.drag-over {
+    background: rgba(255, 235, 59, 0.3);
+    border-color: #ffeb3b;
+}
+
+.drop-zone-placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* BEHELYEZETT KÁRTYA A PÁLYÁN (KÉT SOROS ELRENDEZÉS) */
+.placed-card {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f4f9 100%);
+    border: 1.5px solid #1e90ff;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2px 6px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+/* 1. SOR: Mezszám + Zászló + Név */
+.placed-card-row1 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 1px solid #d0e1f9;
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+}
+
+.placed-card-row1 .player-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+/* 2. SOR: Attribútumok (Poszt, O, BC, SC) */
+.placed-card-row2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #333;
+}
+
+.placed-card-row2 .stat-tag {
+    font-size: 9px;
+    background: #e3f2fd;
+    padding: 0 3px;
+    border-radius: 2px;
+    border: 1px solid #90caf9;
+    font-weight: bold;
+}
+
+/* Törlés ikon gomb */
+.remove-player-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid white;
+    z-index: 10;
+}
+
+.placed-card:hover .remove-player-btn {
+    display: flex;
+}
