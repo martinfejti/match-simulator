@@ -1,6 +1,5 @@
 package hu.martinez.matchsimulator.career.lineup;
 
-import hu.martinez.matchsimulator.career.fixture.FixtureService;
 import hu.martinez.matchsimulator.career.player.PlayerService;
 import hu.martinez.matchsimulator.career.team.TeamService;
 import jakarta.annotation.Nonnull;
@@ -20,7 +19,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class LineupController {
 
-    private final FixtureService fixtureService;
+    private final LineupService lineupService;
     private final PlayerService playerService;
     private final TeamService teamService;
 
@@ -45,7 +44,9 @@ public class LineupController {
         var forwardList = playerService.getForwardsByTeamId(selectedTeam.id());
         model.addAttribute("forwardList", forwardList);
 
+        // TODO FM: pass these from parameters!!!
         model.addAttribute("fixtureId", 3);
+        model.addAttribute("isHomeTeam", true);
 
         return "lineup";
     }
@@ -63,6 +64,8 @@ public class LineupController {
                         player.teamId(),
                         player.position()
                 ));
+
+        lineupService.saveLineup(createLineup);
 
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/career/menu");

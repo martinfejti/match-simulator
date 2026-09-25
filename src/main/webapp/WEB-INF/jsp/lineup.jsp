@@ -26,6 +26,7 @@
 
         <!-- Rejtett mezők a mentéshez -->
         <input type="hidden" id="fixtureId" value="${fixtureId}" />
+        <input type="hidden" id="isHomeTeam" value="${isHomeTeam}" />
         <input type="hidden" id="teamId" value="${selectedTeam.id()}" />
 
         <!-- Fő széles munkaterület -->

@@ -6,6 +6,7 @@ import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class FixtureService {
     }
 
     @Nonnull
+    @Transactional
     public void storeFixtures(@Nonnull List<CreateFixture> createFixtureList) {
 
         var fixtureListToStore = createFixtureList.stream()
@@ -73,7 +75,19 @@ public class FixtureService {
         var lastFixture = fixtureRepository.findLastFinishedFixtureForTeam(teamMapper.mapToEntity(team));
 
         return lastFixture.map(fixtureMapper::map);
+    }
 
+    public void saveFormation(
+            @Nonnull Boolean isHomeTeam,
+            @Nonnull Integer fixtureId,
+            @Nonnull String formation
+    ) {
+
+        if (isHomeTeam) {
+            fixtureRepository.updateHomeFormation(fixtureId, formation);
+        } else {
+            fixtureRepository.updateAwayFormation(fixtureId, formation);
+        }
     }
 
 }

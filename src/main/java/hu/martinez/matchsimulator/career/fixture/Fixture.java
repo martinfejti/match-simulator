@@ -15,11 +15,13 @@ public record Fixture(
         Integer homeScore,
         Integer awayScore,
 
+        String homeFormation,
         Integer homeBigChances,
         Integer homeSmallChances,
         Integer homeYellowCards,
         Integer homeRedCards,
 
+        String awayFormation,
         Integer awayBigChances,
         Integer awaySmallChances,
         Integer awayYellowCards,

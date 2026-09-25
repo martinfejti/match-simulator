@@ -23,12 +23,14 @@ CREATE TABLE fixture (
     away_score INTEGER DEFAULT 0,
 
     -- Hazai csapat statisztikák
+    home_formation TEXT,
     home_big_chances INTEGER DEFAULT 0,
     home_small_chances INTEGER DEFAULT 0,
     home_yellow_cards INTEGER DEFAULT 0,
     home_red_cards INTEGER DEFAULT 0,
 
     -- Vendég csapat statisztikák
+    away_formation TEXT,
     away_big_chances INTEGER DEFAULT 0,
     away_small_chances INTEGER DEFAULT 0,
     away_yellow_cards INTEGER DEFAULT 0,

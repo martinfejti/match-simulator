@@ -234,6 +234,7 @@ function saveLineup() {
     }
 
     const fixtureId = document.getElementById("fixtureId").value;
+    const isHomeTeam = document.getElementById("isHomeTeam").value;
     const teamId = document.getElementById("teamId").value;
     const formationSelect = document.getElementById("formationSelect").value;
 
@@ -252,6 +253,8 @@ function saveLineup() {
     }
 
     const createLineup = {
+        fixtureId: fixtureId,
+        isHomeTeam: isHomeTeam,
         formation: formationSelect,
         starterPlayerList: payload
     };

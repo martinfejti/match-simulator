@@ -41,6 +41,9 @@ public class FixtureEntity {
     @Column(name = "away_score")
     private Integer awayScore;
 
+    @Column(name = "home_formation")
+    private String homeFormation;
+
     @Column(name = "home_big_chances")
     private Integer homeBigChances;
 
@@ -52,6 +55,9 @@ public class FixtureEntity {
 
     @Column(name = "home_red_cards")
     private Integer homeRedCards;
+
+    @Column(name = "away_formation")
+    private String awayFormation;
 
     @Column(name = "away_big_chances")
     private Integer awayBigChances;
