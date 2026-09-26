@@ -26,7 +26,7 @@
         <!-- FELSŐ DOBOZ: Match Banner (Mérkőzés adatai) -->
         <div class="preview-box match-banner-box">
             <div class="box-header">
-                <span class="box-header-title">Matchweek ${fixture.matchWeek()}, Fixture #${fixture.matchNumberInWeek()}</span>
+                <span class="box-header-title">Matchweek ${fixture.matchWeek()} - Fixture ${fixture.matchNumberInWeek()}</span>
 
                 <!-- Start Match gomb a fejléc jobb oldalán: csak akkor aktív, ha mindkét felállás ki van töltve -->
                 <c:choose>
@@ -72,33 +72,6 @@
         <div class="preview-box lineups-box">
             <div class="box-header">
                 <span class="box-header-title">Starting Lineups</span>
-
-                <!-- TODO these buttons should be inside the "empty" lineup box!!! -->
-                <div class="header-buttons-group">
-                    <!-- Hazai kezdő kiválasztó gomb: megjelenik, ha a homeFormation üres -->
-                    <c:if test="${empty fixture.homeFormation()}">
-                        <c:url var="selectHomeLineup" value="/career/lineup/select-lineup">
-                            <c:param name="fixtureId" value="${fixture.id()}"/>
-                            <c:param name="teamId" value="${fixture.homeTeam().id()}"/>
-                            <c:param name="isHomeTeam" value="true"/>
-                        </c:url>
-                        <a href="${selectHomeLineup}" class="btn-select-lineup">
-                            <i class="fa-solid fa-user-plus"></i> Select Home Starting 11
-                        </a>
-                    </c:if>
-
-                    <!-- Vendég kezdő kiválasztó gomb: megjelenik, ha az awayFormation üres -->
-                    <c:if test="${empty fixture.awayFormation()}">
-                        <c:url var="selectAwayLineup" value="/career/lineup/select-lineup">
-                            <c:param name="fixtureId" value="${fixture.id()}"/>
-                            <c:param name="teamId" value="${fixture.awayTeam().id()}"/>
-                            <c:param name="isHomeTeam" value="false"/>
-                        </c:url>
-                        <a href="${selectAwayLineup}" class="btn-select-lineup">
-                            <i class="fa-solid fa-user-plus"></i> Select Away Starting Eleven
-                        </a>
-                    </c:if>
-                </div>
             </div>
 
             <div class="box-content lineups-content">
@@ -128,7 +101,19 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <li class="empty-lineup-msg">No home lineup selected yet.</li>
+                                <li class="empty-lineup-msg">
+                                    <span>No home lineup selected yet.</span>
+                                    <c:if test="${empty fixture.homeFormation()}">
+                                        <c:url var="selectHomeLineup" value="/career/lineup/select-lineup">
+                                            <c:param name="fixtureId" value="${fixture.id()}"/>
+                                            <c:param name="teamId" value="${fixture.homeTeam().id()}"/>
+                                            <c:param name="isHomeTeam" value="true"/>
+                                        </c:url>
+                                        <a href="${selectHomeLineup}" class="btn-select-lineup">
+                                            <i class="fa-solid fa-user-plus"></i> Select Home Starting Lineup
+                                        </a>
+                                    </c:if>
+                                </li>
                             </c:otherwise>
                         </c:choose>
                     </ul>
@@ -145,7 +130,6 @@
                         <span class="team-title-text">${fixture.awayTeam().name()}</span>
                     </div>
 
-                    <!-- TODO make this a bit more compact! -->
                     <ul class="player-list">
                         <c:choose>
                             <c:when test="${not empty awayStartingPlayerList}">
@@ -154,7 +138,6 @@
                                         <div class="player-info-left">
                                             <span class="shirt-badge">${player.shirtNumber()}</span>
                                             <img src="<c:url value='/flag/${player.nationality()}.png'/>" alt="${player.nationality()}" class="flag-img">
-                                            <!-- TODO handle name formatting! -->
                                             <span class="player-fullname">${player.firstName()} ${player.lastName()}</span>
                                         </div>
                                         <div class="player-info-right">
@@ -164,7 +147,19 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <li class="empty-lineup-msg">No away lineup selected yet.</li>
+                                <li class="empty-lineup-msg">
+                                    <span>No away lineup selected yet.</span>
+                                    <c:if test="${empty fixture.awayFormation()}">
+                                        <c:url var="selectAwayLineup" value="/career/lineup/select-lineup">
+                                            <c:param name="fixtureId" value="${fixture.id()}"/>
+                                            <c:param name="teamId" value="${fixture.awayTeam().id()}"/>
+                                            <c:param name="isHomeTeam" value="false"/>
+                                        </c:url>
+                                        <a href="${selectAwayLineup}" class="btn-select-lineup">
+                                            <i class="fa-solid fa-user-plus"></i> Select Away Starting Lineup
+                                        </a>
+                                    </c:if>
+                                </li>
                             </c:otherwise>
                         </c:choose>
                     </ul>
