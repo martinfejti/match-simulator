@@ -2,8 +2,10 @@ package hu.martinez.matchsimulator.career;
 
 import hu.martinez.matchsimulator.career.fixture.Fixture;
 import hu.martinez.matchsimulator.career.fixture.FixtureService;
+import hu.martinez.matchsimulator.career.information.InformationService;
 import hu.martinez.matchsimulator.career.schedule.ScheduleGeneratorService;
 import hu.martinez.matchsimulator.career.team.TeamService;
+import hu.martinez.matchsimulator.selector.save.Save;
 import hu.martinez.matchsimulator.selector.save.SaveService;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CareerMenuController {
 
     private final FixtureService fixtureService;
+    private final InformationService informationService;
     private final SaveService saveService;
     private final ScheduleGeneratorService scheduleGeneratorService;
     private final TeamService teamService;
@@ -25,12 +28,14 @@ public class CareerMenuController {
     @GetMapping
     public String displayCareerMenu(@Nonnull Model model) {
 
+        var information = informationService.getCareerInformation();
         var teamList = teamService.getAllTeams();
         var fixtureList = fixtureService.getNextMatchWeek();
         var numberOfFinishedFixtures = fixtureService.getNumberOfFinishedFixtures();
         var numberOfNotFinishedFixtures = fixtureService.getNumberOfNotFinishedFixtures();
         var nextFixture = fixtureService.getNextFixture();
 
+        model.addAttribute("information", information);
         model.addAttribute("numberOfTeams", teamList.size());
         model.addAttribute("fixtureList", fixtureList);
         model.addAttribute("numberOfFinishedFixtures", numberOfFinishedFixtures);
@@ -51,7 +56,13 @@ public class CareerMenuController {
     @GetMapping("/start-new-season")
     public String startNewSeason(@Nonnull Model model) {
 
-        // TODO FM: get and store the save into the copied database!
+        var save = model.getAttribute("save");
+        if (save == null) {
+            throw new IllegalStateException("Save not found in model!");
+        }
+
+        informationService.saveInformation((Save) save);
+        var information = informationService.getCareerInformation();
 
         var teamList = teamService.getAllTeams();
         var fixtureListToStore = scheduleGeneratorService.generateSchedule(teamList);
@@ -62,6 +73,7 @@ public class CareerMenuController {
         var numberOfNotFinishedFixtures = fixtureService.getNumberOfNotFinishedFixtures();
         var nextFixture = fixtureService.getNextFixture();
 
+        model.addAttribute("information", information);
         model.addAttribute("numberOfTeams", teamList.size());
         model.addAttribute("fixtureList", fixtureList);
         model.addAttribute("numberOfFinishedFixtures", numberOfFinishedFixtures);
@@ -74,12 +86,14 @@ public class CareerMenuController {
     @GetMapping("/open-season")
     public String openSeason(@Nonnull Model model) {
 
+        var information = informationService.getCareerInformation();
         var teamList = teamService.getAllTeams();
         var fixtureList = fixtureService.getNextMatchWeek();
         var numberOfFinishedFixtures = fixtureService.getNumberOfFinishedFixtures();
         var numberOfNotFinishedFixtures = fixtureService.getNumberOfNotFinishedFixtures();
         var nextFixture = fixtureService.getNextFixture();
 
+        model.addAttribute("information", information);
         model.addAttribute("numberOfTeams", teamList.size());
         model.addAttribute("fixtureList", fixtureList);
         model.addAttribute("numberOfFinishedFixtures", numberOfFinishedFixtures);

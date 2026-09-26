@@ -28,11 +28,11 @@
                 <div class="info-column">
                     <div class="info-row">
                         <span class="info-label">League:</span>
-                        <span class="info-value">${save.name()}</span>
+                        <span class="info-value"><img src="<c:url value='/flag/${information.country()}.png'/>" alt="${information.country()}" class="flag-icon">${information.leagueName()}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Season:</span>
-                        <span class="info-value">2013/2014</span>
+                        <span class="info-value">${information.date()}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Matches simulated:</span>
@@ -43,7 +43,7 @@
                 <div class="info-column">
                     <div class="info-row">
                         <span class="info-label">Save name:</span>
-                        <span class="info-value">${save.name()}</span>
+                        <span class="info-value">${information.saveName()}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Number of teams:</span>
