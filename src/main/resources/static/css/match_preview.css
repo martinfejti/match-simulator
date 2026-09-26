@@ -1,0 +1,356 @@
+/* ==========================================================================
+   MATCH PREVIEW - EGYEDI TELJES KÉPERNYŐS STÍLUS
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-image: url('/images/background.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #082032;
+    color: #333;
+}
+
+/* Teljes képernyős csomagoló (ugyanolyan széles, mint a lineup.jsp) */
+.match-preview-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   NAVBAR
+   -------------------------------------------------------------------------- */
+.preview-menubar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    border-radius: 6px;
+    border: 1px solid #003366;
+    padding: 6px 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.preview-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.preview-nav-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.preview-nav-links li a:hover {
+    color: #ffeb3b;
+}
+
+/* --------------------------------------------------------------------------
+   DOBOZOK ALAPSTÍLUSA
+   -------------------------------------------------------------------------- */
+.preview-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #1e90ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-header {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #003366;
+}
+
+.box-header-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   FELSŐ DOBOZ - MATCH BANNER
+   -------------------------------------------------------------------------- */
+.match-banner-box .banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(224,242,254,0.9) 100%);
+}
+
+.team-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.home-profile {
+    justify-content: flex-start;
+}
+
+.away-profile {
+    justify-content: flex-end;
+}
+
+.team-logo {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.team-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.team-details.align-right {
+    text-align: right;
+}
+
+.team-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: #002244;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.team-manager {
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+}
+
+/* Középső VS doboz */
+.vs-container {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vs-badge {
+    background-color: #ffffff;
+    color: #1e90ff;
+    border: 3px solid #1e90ff;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 10px 22px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   GOMBOK (Start Match & Select Lineup)
+   -------------------------------------------------------------------------- */
+.header-action-form {
+    margin: 0;
+}
+
+.btn-start-match {
+    background: linear-gradient(to bottom, #28a745 0%, #1e7e34 100%);
+    color: #ffffff;
+    border: 1px solid #145a23;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-start-match:hover:not(.btn-disabled) {
+    background: linear-gradient(to bottom, #34ce57 0%, #218838 100%);
+    color: #ffeb3b;
+}
+
+.btn-start-match.btn-disabled {
+    background: #6c757d;
+    border-color: #495057;
+    color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+.header-buttons-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-select-lineup {
+    background: linear-gradient(to bottom, #ffc107 0%, #d39e00 100%);
+    color: #002244;
+    border: 1px solid #b78a00;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-select-lineup:hover {
+    background: linear-gradient(to bottom, #ffca2c 0%, #e0a800 100%);
+    color: #000;
+}
+
+/* --------------------------------------------------------------------------
+   ALSÓ DOBOZ - STARTING LINEUPS
+   -------------------------------------------------------------------------- */
+.lineups-content {
+    display: flex;
+    padding: 15px;
+    gap: 15px;
+    background-color: #ffffff;
+}
+
+.lineup-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lineup-divider {
+    width: 2px;
+    background: linear-gradient(to bottom, #e0e8f5 0%, #1e90ff 50%, #e0e8f5 100%);
+}
+
+.team-lineup-header {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.team-lineup-header.align-right {
+    justify-content: flex-end;
+}
+
+.formation-text {
+    color: #ffeb3b;
+    font-size: 13px;
+}
+
+/* Játékos lista (player_row.jsp stílusú komponensek) */
+.player-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+}
+
+.player-row-item:nth-child(even) {
+    background-color: #edf2f7;
+}
+
+.player-row-item:hover {
+    background-color: #e2e8f0;
+}
+
+.player-info-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Vendég oldalon a vizuális szimmetriához külön osztály, ha jobbra igazított elrendezést szeretnél */
+.player-row-item.reverse-row {
+    flex-direction: row;
+}
+
+.shirt-badge {
+    background-color: #1e90ff;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.flag-img {
+    width: 18px;
+    height: 12px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.player-fullname {
+    font-size: 13px;
+    font-weight: 600;
+    color: #002244;
+}
+
+.overall-badge {
+    background-color: #e3f2fd;
+    color: #003366;
+    border: 1px solid #90caf9;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.empty-lineup-msg {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}

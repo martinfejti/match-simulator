@@ -14,6 +14,13 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
 
     @Nonnull
+    public Player getPlayerById(@Nonnull Integer playerId) {
+        return playerRepository.findById(playerId)
+                .map(playerMapper::map)
+                .orElseThrow();
+    }
+
+    @Nonnull
     public List<Player> getPlayersByTeamId(@Nonnull Integer teamId) {
         return playerRepository.findPlayersByTeamId(teamId)
                 .stream()

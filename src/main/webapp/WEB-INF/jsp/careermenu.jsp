@@ -15,7 +15,7 @@
                 <li><a href="<c:url value='/career/team/get-team'/>">Squad</a></li>
                 <li><a href="<c:url value='/career/schedule/get-schedule'/>">Schedule</a></li>
                 <li><a href="<c:url value='/career/standings'/>">Standings</a></li>
-                <li><a href="<c:url value='/career/lineup/get-lineup'/>">Next Fixture</a></li>
+                <li><a href="<c:url value='/career/match-preview/get-next-fixture'/>">Next Fixture</a></li>
             </ul>
         </nav>
         

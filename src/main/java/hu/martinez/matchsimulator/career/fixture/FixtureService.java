@@ -21,6 +21,13 @@ public class FixtureService {
     private final TeamMapper teamMapper;
 
     @Nonnull
+    public Fixture getFixtureById(@Nonnull Integer fixtureId) {
+        return fixtureRepository.findById(fixtureId)
+                .map(fixtureMapper::map)
+                .orElseThrow();
+    }
+
+    @Nonnull
     public List<Fixture> getFixturesByMatchWeekId(@Nonnull Integer matchWeekId) {
         return fixtureRepository.findByMatchWeekOrderByMatchNumberInWeekAsc(matchWeekId)
                 .stream()

@@ -23,13 +23,18 @@ public class LineupController {
     private final PlayerService playerService;
     private final TeamService teamService;
 
-    @GetMapping("/get-lineup")
-    public String getLineup(@Nonnull Model model) {
+    @GetMapping("/select-lineup")
+    public String getLineup(
+            @Nonnull Model model,
+            @Nonnull @RequestParam Integer fixtureId,
+            @Nonnull @RequestParam Integer teamId,
+            @Nonnull @RequestParam Boolean isHomeTeam
+    ) {
 
-        var selectedTeam = teamService.getTeamById(3); // TODO: only for testing
+        var selectedTeam = teamService.getTeamById(teamId);
         model.addAttribute("selectedTeam", selectedTeam);
 
-        var playerList = playerService.getPlayersByTeamId(selectedTeam.id()); // TODO: only for testing
+        var playerList = playerService.getPlayersByTeamId(selectedTeam.id());
         model.addAttribute("playerList", playerList);
 
         var goalkeeperList = playerService.getGoalkeepersByTeamId(selectedTeam.id());
@@ -44,9 +49,8 @@ public class LineupController {
         var forwardList = playerService.getForwardsByTeamId(selectedTeam.id());
         model.addAttribute("forwardList", forwardList);
 
-        // TODO FM: pass these from parameters!!!
-        model.addAttribute("fixtureId", 3);
-        model.addAttribute("isHomeTeam", true);
+        model.addAttribute("fixtureId", fixtureId);
+        model.addAttribute("isHomeTeam", isHomeTeam);
 
         return "lineup";
     }
