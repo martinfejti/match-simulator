@@ -1,0 +1,190 @@
+body {
+    background-image: url('/images/background.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Teljes képernyős szélességhez állítva, nem szorítjuk 1000px-re */
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Kék sormenü */
+.navbar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    border-radius: 8px;
+    border: 1px solid #003366;
+    padding: 6px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 10px;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+.nav-menu li a:hover {
+    color: #ffeb3b;
+}
+
+/* Kártya dobozok stílusa */
+.card-box {
+    background-color: #ffffff;
+    border: 3px solid #1e90ff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    padding: 10px 15px;
+    color: #ffeb3b;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #ffeb3b;
+    border-bottom: none;
+}
+
+/* Fejléc elrendezés a Next Fixture gombbal */
+.header-with-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.next-fixture-btn {
+    background-color: #ffeb3b;
+    color: #003366;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.next-fixture-btn:hover {
+    background-color: #ffffff;
+    color: #0056b3;
+}
+
+.card-body {
+    padding: 15px 20px;
+}
+
+/* --- 1. Career Information: Kétoszlopos elrendezés --- */
+.info-grid {
+    display: flex;
+    gap: 30px;
+}
+
+.info-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #d0d0d0;
+    padding-bottom: 4px;
+    font-size: 14px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #003366;
+}
+
+.info-value {
+    color: #1a4b8c;
+    text-align: right;
+    font-weight: 500;
+}
+
+/* --- 2. Fixture Lista kompakt sora --- */
+.fixture-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.fixture-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #eef2f5;
+    font-size: 14px;
+    color: #1a4b8c;
+}
+
+.fixture-row:hover {
+    background-color: #f4f8fc;
+}
+
+/* Meccsszám balra */
+.match-num {
+    width: 30px;
+    font-weight: bold;
+    color: #888888;
+    font-size: 12px;
+}
+
+/* Csapatok és eredmény középre igazítása */
+.team {
+    flex: 1;
+    font-weight: 600;
+}
+
+.home-team {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.away-team {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.score-container {
+    width: 70px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f4f8;
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #003366;
+    border: 1px solid #d0e0f0;
+}

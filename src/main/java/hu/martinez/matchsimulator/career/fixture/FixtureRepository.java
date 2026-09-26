@@ -13,7 +13,19 @@ import java.util.Optional;
 public interface FixtureRepository extends JpaRepository<FixtureEntity, Integer> {
 
     @Nonnull
+    Integer countByIsFinishedTrue();
+
+    @Nonnull
+    Integer countByIsFinishedFalse();
+
+    @Nonnull
     List<FixtureEntity> findByMatchWeekOrderByMatchNumberInWeekAsc(@Nonnull Integer matchWeek);
+
+    @Query("SELECT f FROM FixtureEntity f " +
+            "WHERE f.isFinished = false " +
+            "ORDER BY f.matchWeek ASC, f.matchNumberInWeek ASC " +
+            "LIMIT 1")
+    Optional<FixtureEntity> findNextUpcomingFixture();
 
     @Query("""
         SELECT f FROM FixtureEntity f 

@@ -1,5 +1,6 @@
 package hu.martinez.matchsimulator.career;
 
+import hu.martinez.matchsimulator.career.fixture.Fixture;
 import hu.martinez.matchsimulator.career.fixture.FixtureService;
 import hu.martinez.matchsimulator.career.schedule.ScheduleGeneratorService;
 import hu.martinez.matchsimulator.career.team.TeamService;
@@ -26,9 +27,15 @@ public class CareerMenuController {
 
         var teamList = teamService.getAllTeams();
         var fixtureList = fixtureService.getNextMatchWeek();
+        var numberOfFinishedFixtures = fixtureService.getNumberOfFinishedFixtures();
+        var numberOfNotFinishedFixtures = fixtureService.getNumberOfNotFinishedFixtures();
+        var nextFixture = fixtureService.getNextFixture();
 
         model.addAttribute("numberOfTeams", teamList.size());
         model.addAttribute("fixtureList", fixtureList);
+        model.addAttribute("numberOfFinishedFixtures", numberOfFinishedFixtures);
+        model.addAttribute("numberOfNotFinishedFixtures", numberOfNotFinishedFixtures);
+        model.addAttribute("nextFixtureId", nextFixture.map(Fixture::id).orElse(null));
 
         return "careermenu";
     }
@@ -51,9 +58,15 @@ public class CareerMenuController {
         fixtureService.storeFixtures(fixtureListToStore);
 
         var fixtureList = fixtureService.getFixturesByMatchWeekId(1);
+        var numberOfFinishedFixtures = fixtureService.getNumberOfFinishedFixtures();
+        var numberOfNotFinishedFixtures = fixtureService.getNumberOfNotFinishedFixtures();
+        var nextFixture = fixtureService.getNextFixture();
 
         model.addAttribute("numberOfTeams", teamList.size());
         model.addAttribute("fixtureList", fixtureList);
+        model.addAttribute("numberOfFinishedFixtures", numberOfFinishedFixtures);
+        model.addAttribute("numberOfNotFinishedFixtures", numberOfNotFinishedFixtures);
+        model.addAttribute("nextFixtureId", nextFixture.map(Fixture::id).orElse(null));
 
         return "careermenu";
     }
@@ -63,9 +76,15 @@ public class CareerMenuController {
 
         var teamList = teamService.getAllTeams();
         var fixtureList = fixtureService.getNextMatchWeek();
+        var numberOfFinishedFixtures = fixtureService.getNumberOfFinishedFixtures();
+        var numberOfNotFinishedFixtures = fixtureService.getNumberOfNotFinishedFixtures();
+        var nextFixture = fixtureService.getNextFixture();
 
         model.addAttribute("numberOfTeams", teamList.size());
         model.addAttribute("fixtureList", fixtureList);
+        model.addAttribute("numberOfFinishedFixtures", numberOfFinishedFixtures);
+        model.addAttribute("numberOfNotFinishedFixtures", numberOfNotFinishedFixtures);
+        model.addAttribute("nextFixtureId", nextFixture.map(Fixture::id).orElse(null));
 
         return "careermenu";
     }

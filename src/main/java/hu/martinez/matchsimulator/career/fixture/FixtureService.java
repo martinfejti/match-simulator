@@ -36,6 +36,16 @@ public class FixtureService {
     }
 
     @Nonnull
+    public Integer getNumberOfFinishedFixtures() {
+        return fixtureRepository.countByIsFinishedTrue();
+    }
+
+    @Nonnull
+    public Integer getNumberOfNotFinishedFixtures() {
+        return fixtureRepository.countByIsFinishedFalse();
+    }
+
+    @Nonnull
     @Transactional
     public void storeFixtures(@Nonnull List<CreateFixture> createFixtureList) {
 
@@ -48,6 +58,14 @@ public class FixtureService {
         fixtureRepository.saveAll(fixtureListToStore);
 
         log.debug("storeFixture - Fixtures are created");
+    }
+
+    @Nonnull
+    public Optional<Fixture> getNextFixture() {
+
+        var nextFixture = fixtureRepository.findNextUpcomingFixture();
+
+        return nextFixture.map(fixtureMapper::map);
     }
 
     @Nonnull

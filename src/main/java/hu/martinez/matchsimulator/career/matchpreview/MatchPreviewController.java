@@ -18,9 +18,9 @@ public class MatchPreviewController {
     private final MatchPreviewService matchPreviewService;
 
     @GetMapping("/get-next-fixture")
-    public String getNextFixture(@Nonnull Model model) { // TODO fixtureId should come from @RequestParam!
+    public String getNextFixture(@Nonnull Model model, @Nonnull @RequestParam Integer fixtureId) {
 
-        var nextFixture = fixtureService.getFixtureById(4);
+        var nextFixture = fixtureService.getFixtureById(fixtureId);
 
         model.addAttribute("fixture", nextFixture);
 
