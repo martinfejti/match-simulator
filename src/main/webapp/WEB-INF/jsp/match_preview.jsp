@@ -90,9 +90,10 @@
                                 <c:forEach var="player" items="${homeStartingPlayerList}">
                                     <li class="player-row-item">
                                         <div class="player-info-left">
+                                            <span class="position-badge">${player.position()}</span>
                                             <span class="shirt-badge">${player.shirtNumber()}</span>
                                             <img src="<c:url value='/flag/${player.nationality()}.png'/>" alt="${player.nationality()}" class="flag-img">
-                                            <span class="player-fullname">${player.firstName()} ${player.lastName()}</span>
+                                            <span class="player-fullname">${player.name()}</span>
                                         </div>
                                         <div class="player-info-right">
                                             <span class="overall-badge">${player.overall()}</span>
@@ -136,9 +137,10 @@
                                 <c:forEach var="player" items="${awayStartingPlayerList}">
                                     <li class="player-row-item reverse-row">
                                         <div class="player-info-left">
+                                            <span class="position-badge">${player.position()}</span>
                                             <span class="shirt-badge">${player.shirtNumber()}</span>
                                             <img src="<c:url value='/flag/${player.nationality()}.png'/>" alt="${player.nationality()}" class="flag-img">
-                                            <span class="player-fullname">${player.firstName()} ${player.lastName()}</span>
+                                            <span class="player-fullname">${player.name()}</span>
                                         </div>
                                         <div class="player-info-right">
                                             <span class="overall-badge">${player.overall()}</span>

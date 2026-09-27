@@ -72,7 +72,7 @@ public class LineupController {
         lineupService.saveLineup(createLineup);
 
         Map<String, String> response = new HashMap<>();
-        response.put("redirectUrl", "/career/menu");
+        response.put("redirectUrl", "/career/match-preview/get-next-fixture?fixtureId=" + createLineup.fixtureId());
 
         return ResponseEntity.ok(response);
     }
