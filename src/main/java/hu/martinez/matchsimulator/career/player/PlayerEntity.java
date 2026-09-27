@@ -37,7 +37,7 @@ public class PlayerEntity {
     @Column(name = "primary_position")
     private String primaryPosition;
 
-    @Column(name = "otherPositions")
+    @Column(name = "other_positions")
     private String otherPositions;
 
     @Column(name = "preferred_foot")
@@ -76,7 +76,7 @@ public class PlayerEntity {
     @Column(name = "number_of_yellow_cards")
     private Integer numberOfYellowCards;
 
-    @Column(name = "numberOfRedCards")
+    @Column(name = "number_of_red_cards")
     private Integer numberOfRedCards;
 
 }

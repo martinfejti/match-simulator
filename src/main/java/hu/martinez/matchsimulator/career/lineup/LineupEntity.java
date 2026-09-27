@@ -17,16 +17,16 @@ public class LineupEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "fixture_id")
+    @Column(name = "fixture_id", nullable = false)
     private Integer fixtureId;
 
-    @Column(name = "team_id")
+    @Column(name = "team_id", nullable = false)
     private Integer teamId;
 
-    @Column(name = "player_id")
+    @Column(name = "player_id", nullable = false)
     private Integer playerId;
 
-    @Column(name = "position")
+    @Column(name = "position", nullable = false)
     private String position;
 
 }

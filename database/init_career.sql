@@ -1,0 +1,56 @@
+INSERT INTO team (id, name) VALUES (1, "Arsenal");
+INSERT INTO team (id, name) VALUES (2, "Chelsea");
+INSERT INTO team (id, name) VALUES (3, "Liverpool");
+INSERT INTO team (id, name) VALUES (4, "Manchester City");
+
+-- Arsenal
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (1, "Wojciech", "Szczęsny", 1, "pol", 23, "GK", "R", 1, 80, 0, 0);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (2, "Bacary", "Sagna", 1, "fra", 30, "RB", "R", 3, 80, 48, 61);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (3, "Per", "Mertesacker", 1, "ger", 28, "CB", "R", 4, 82, 36, 25);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (4, "Laurent", "Koscielny", 1, "fra", 28, "CB", "R", 4, 82, 32, 47);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (5, "Kieran", "Gibbs", 1, "eng", 23, "LB", "L", 28, 78, 46, 64);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (6, "Mikel", "Arteta", 1, "esp", 31, "CDM", "R", 8, 80, 71, 75);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (7, "Aaron", "Ramsey", 1, "wal", 22, "CDM", "R", 16, 82, 76, 77);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (8, "Jack", "Wilshere", 1, "eng", 21, "CM", "L", 10, 82, 64, 73);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (9, "Santi", "Cazorla", 1, "esp", 28, "LM", "R", 19, 84, 77, 82);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (10, "Mesut", "Özil", 1, "ger", 24, "CAM", "L", 11, 84, 73, 75);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (11, "Olivier", "Giroud", 1, "fra", 26, "ST", "L", 12, 79, 80, 75);
+
+-- Chelsea
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (12, "Petr", "Čech", 2, "cze", 31, "GK", "L", 1, 85, 0, 0);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (13, "Branislav", "Ivanović", 2, "srb", 29, "RB", "R", 2, 81, 56, 61);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (14, "David", "Luiz", 2, "bra", 26, "CB", "R", 4, 82, 58, 71);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (15, "John", "Terry", 2, "eng", 32, "CB", "R", 26, 83, 46, 33);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (16, "Ashley", "Cole", 2, "eng", 32, "LB", "L", 3, 83, 43, 58);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (17, "", "Ramires", 2, "bra", 26, "CDM", "R", 7, 81, 70, 66);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (18, "Nemanja", "Matić", 2, "srb", 25, "CDM", "L", 21, 81, 64, 75);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (19, "Juan", "Mata", 2, "esp", 25, "RM", "L", 10, 87, 79, 72);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (20, "", "Oscar", 2, "bra", 21, "CAM", "R", 11, 84, 75, 76);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (21, "Eden", "Hazard", 2, "bel", 22, "LM", "R", 17, 88, 83, 82);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (22, "Fernando", "Torres", 2, "esp", 29, "ST", "R", 9, 82, 81, 78);
+
+-- Liverpool
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (23, "Simon", "Mignolet", 3, "bel", 23, "GK", "R", 25, 82, 0, 0);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (24, "Glen", "Johnson", 3, "eng", 29, "RB", "R", 2, 78, 57, 69);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (25, "Martin", "Škrtel", 3, "svk", 28, "CB", "R", 37, 81, 35, 35);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (26, "Daniel", "Agger", 3, "den", 28, "CB", "L", 5, 81, 58, 73);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (27, "José", "Enrique", 3, "esp", 27, "LB", "L", 3, 79, 42, 53);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (28, "Lucas", "Leiva", 3, "bra", 26, "CDM", "R", 21, 80, 23, 35);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (29, "Steven", "Gerrard", 3, "eng", 33, "CDM", "R", 8, 83, 79, 86);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (30, "Philippe", "Coutinho", 3, "bra", 21, "CAM", "R", 10, 81, 66, 68);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (31, "Daniel", "Sturridge", 3, "eng", 24, "RW", "R", 15, 83, 86, 78);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (32, "Luis", "Suárez", 3, "uru", 26, "ST", "R", 7, 89, 89, 84);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (33, "Raheem", "Sterling", 3, "eng", 18, "LW", "R", 31, 79, 69, 64);
+
+-- Manchester City
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (34, "Joe", "Hart", 4, "eng", 26, "GK", "R", 1, 82, 0, 0);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (35, "Pablo", "Zabaleta", 4, "arg", 28, "RB", "R", 5, 82, 41, 57);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (36, "Vincent", "Kompany", 4, "bel", 27, "CB", "R", 4, 86, 45, 67);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (37, "Martín", "Demichelis", 4, "arg", 32, "CB", "R", 26, 79, 43, 34);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (38, "Gaël", "Clichy", 4, "fra", 28, "LB", "L", 22, 80, 33, 42);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (39, "", "Fernandinho", 4, "bra", 28, "CM", "R", 25, 82, 70, 84);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (40, "Yaya", "Touré", 4, "civ", 30, "CM", "R", 42, 86, 82, 82);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (41, "Samir", "Nasri", 4, "fra", 26, "RM", "R", 8, 84, 76, 77);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (42, "David", "Silva", 4, "esp", 27, "LM", "L", 21, 87, 76, 80);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (43, "Edin", "Džeko", 4, "bih", 27, "ST", "R", 10, 83, 84, 80);
+INSERT INTO player (id, first_name, last_name, team_id, nationality, age, primary_position, preferred_foot, shirt_number, overall, big_chance_finishing, small_chance_finishing) VALUES (44, "Sergio", "Agüero", 4, "arg", 25, "ST", "R", 16, 88, 90, 79);

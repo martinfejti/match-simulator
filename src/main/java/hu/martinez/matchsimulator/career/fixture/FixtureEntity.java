@@ -18,10 +18,10 @@ public class FixtureEntity {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "match_week")
+    @Column(name = "match_week", nullable = false)
     private Integer matchWeek;
 
-    @Column(name = "match_number_in_week")
+    @Column(name = "match_number_in_week", nullable = false)
     private Integer matchNumberInWeek;
 
     @ManyToOne
