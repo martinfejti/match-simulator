@@ -31,7 +31,7 @@
                 <!-- Start Match gomb a fejléc jobb oldalán: csak akkor aktív, ha mindkét felállás ki van töltve -->
                 <c:choose>
                     <c:when test="${not empty fixture.homeFormation() and not empty fixture.awayFormation()}">
-                        <form action="<c:url value='/career/match/simulate'/>" method="post" class="header-action-form">
+                        <form action="<c:url value='/career/simulation/simulate-match'/>" method="post" class="header-action-form">
                             <input type="hidden" name="fixtureId" value="${fixture.id()}" />
                             <button type="submit" class="btn-start-match">
                                 <i class="fa-solid fa-play"></i> Start Match
