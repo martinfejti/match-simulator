@@ -3,6 +3,8 @@ package hu.martinez.matchsimulator.career.simulation;
 import hu.martinez.matchsimulator.career.fixture.FixtureService;
 import hu.martinez.matchsimulator.career.lineup.LineupService;
 import hu.martinez.matchsimulator.career.player.PlayerService;
+import hu.martinez.matchsimulator.career.simulation.postsimulation.EnergyService;
+import hu.martinez.matchsimulator.career.simulation.postsimulation.InjuryService;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationTeamDataService;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,11 @@ public class MatchSimulationService {
     private final PlayerService playerService;
 
     private final ChanceCalculatorService chanceCalculatorService;
+    private final ChanceSimulatorService chanceSimulatorService;
     private final PreSimulationTeamDataService preSimulationTeamDataService;
+
+    private final EnergyService energyService;
+    private final InjuryService injuryService;
 
     public void simulateMatch(@Nonnull Integer fixtureId) {
 
@@ -54,10 +60,21 @@ public class MatchSimulationService {
         );
 
         // chances
-        var chanceContainer = chanceCalculatorService.calculateChances(
+        var chanceContainer = chanceCalculatorService.calculateChances( // TODO this could go into the chance simulator service!
                 homeTeamDataContainer.teamAverage(),
                 awayTeamDataContainer.teamAverage()
         );
+
+        chanceSimulatorService.simulateChances(homeTeamDataContainer, awayTeamDataContainer, chanceContainer);
+
+        // TODO these could go to a PostSimulationService or maybe not
+        // fatigue
+        energyService.handleFatigue(homeTeamDataContainer);
+        energyService.handleFatigue(awayTeamDataContainer);
+
+        // injuries
+        injuryService.handleInjuries(homeTeamDataContainer);
+        injuryService.handleInjuries(awayTeamDataContainer);
     }
 
 }
