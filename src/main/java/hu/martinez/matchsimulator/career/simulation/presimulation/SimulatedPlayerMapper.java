@@ -13,6 +13,7 @@ public class SimulatedPlayerMapper {
         return new SimulatedStarterPlayer(
                 squadPlayer.id(),
                 squadPlayer.lastName(),
+                squadPlayer.teamId(),
                 starterPlayer.position(),
                 squadPlayer.overall(),
                 squadPlayer.bigChanceFinishing().doubleValue() / 100.0,

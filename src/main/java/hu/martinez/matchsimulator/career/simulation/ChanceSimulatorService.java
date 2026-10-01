@@ -1,11 +1,15 @@
 package hu.martinez.matchsimulator.career.simulation;
 
+import hu.martinez.matchsimulator.career.goal.CreateGoal;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationTeamDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedStarterPlayer;
 import jakarta.annotation.Nonnull;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Log4j2
@@ -23,13 +27,17 @@ public class ChanceSimulatorService {
     // TODO this is a bit different, but i think we defo should have a system for downgrading overall if a player plays outside of his natural position!
     // this could be handled in the pre simulation part, where i map the overall into the simulation record
 
-    public void simulateChances(
+    @Nonnull
+    public GoalsContainer simulateChances(
             @Nonnull PreSimulationTeamDataContainer homeTeamDataContainer,
             @Nonnull PreSimulationTeamDataContainer awayTeamDataContainer,
-            @Nonnull ChanceContainer chanceContainer
+            @Nonnull ChanceContainer chanceContainer,
+            @Nonnull Integer fixtureId
     ) {
 
         // home team
+        List<CreateGoal> homeTeamGoalList = new ArrayList<>();
+
         // big chances
         for (var i = 0; i < chanceContainer.numberOfHomeBigChances(); i++) {
 
@@ -45,8 +53,12 @@ public class ChanceSimulatorService {
                 playerToHaveChance = homeTeamDataContainer.defenderList().get(
                         new Random().nextInt(homeTeamDataContainer.defenderList().size()));
             }
-            simulateChance(playerToHaveChance, true, awayTeamDataContainer.goalKeeperSaveBonus());
+
+            var goalOptional = simulateChance(
+                    playerToHaveChance, true, awayTeamDataContainer.goalKeeperSaveBonus(), fixtureId);
+            goalOptional.ifPresent(homeTeamGoalList::add);
         }
+
         // small chances
         for (var i = 0; i < chanceContainer.numberOfHomeSmallChances(); i++) {
 
@@ -62,10 +74,14 @@ public class ChanceSimulatorService {
                 playerToHaveChance = homeTeamDataContainer.defenderList().get(
                         new Random().nextInt(homeTeamDataContainer.defenderList().size()));
             }
-            simulateChance(playerToHaveChance, false, awayTeamDataContainer.goalKeeperSaveBonus());
+            var goalOptional = simulateChance(
+                    playerToHaveChance, false, awayTeamDataContainer.goalKeeperSaveBonus(), fixtureId);
+            goalOptional.ifPresent(homeTeamGoalList::add);
         }
 
         // away team
+        List<CreateGoal> awayTeamGoalList = new ArrayList<>();
+
         // home chances
         for (var i = 0; i < chanceContainer.numberOfAwayBigChances(); i++) {
 
@@ -81,7 +97,10 @@ public class ChanceSimulatorService {
                 playerToHaveChance = awayTeamDataContainer.defenderList().get(
                         new Random().nextInt(awayTeamDataContainer.defenderList().size()));
             }
-            simulateChance(playerToHaveChance, true, awayTeamDataContainer.goalKeeperSaveBonus());
+
+            var goalOptional = simulateChance(
+                    playerToHaveChance, true, awayTeamDataContainer.goalKeeperSaveBonus(), fixtureId);
+            goalOptional.ifPresent(awayTeamGoalList::add);
         }
 
         // small chances
@@ -99,15 +118,21 @@ public class ChanceSimulatorService {
                 playerToHaveChance = awayTeamDataContainer.defenderList().get(
                         new Random().nextInt(awayTeamDataContainer.defenderList().size()));
             }
-            simulateChance(playerToHaveChance, false, awayTeamDataContainer.goalKeeperSaveBonus());
+
+            var goalOptional = simulateChance(
+                    playerToHaveChance, false, awayTeamDataContainer.goalKeeperSaveBonus(), fixtureId);
+            goalOptional.ifPresent(awayTeamGoalList::add);
         }
+
+        return new GoalsContainer(homeTeamGoalList, awayTeamGoalList);
     }
 
     @Nonnull
-    public void simulateChance(
+    public Optional<CreateGoal> simulateChance(
             @Nonnull SimulatedStarterPlayer player,
             @Nonnull Boolean isBigChance,
-            @Nonnull Double goalKeeperSavingBonus
+            @Nonnull Double goalKeeperSavingBonus,
+            @Nonnull Integer fixtureId
     ) {
 
         var forwardAdhocBonus = Math.random() / 10;
@@ -116,13 +141,18 @@ public class ChanceSimulatorService {
         if (isBigChance) {
             if (isGoalFromBigChance(player, forwardAdhocBonus, goalKeeperAdhocBonus, goalKeeperSavingBonus)) {
                 log.info("simulatChance - GOAL for {} from a big chance", player.getName());
+
+                return Optional.of(new CreateGoal(fixtureId, player.getTeamId(), player.getId()));
             }
         } else {
             if (isGoalFromSmallChance(player, forwardAdhocBonus, goalKeeperAdhocBonus, goalKeeperSavingBonus)) {
                 log.info("simulatChance - GOAL for {} from a small chance", player.getName());
+
+                return Optional.of(new CreateGoal(fixtureId, player.getTeamId(), player.getId()));
             }
         }
 
+        return Optional.empty();
     }
 
     @Nonnull

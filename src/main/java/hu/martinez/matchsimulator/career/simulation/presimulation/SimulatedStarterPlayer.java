@@ -11,6 +11,7 @@ public class SimulatedStarterPlayer {
 
     private Integer id;
     private String name;
+    private Integer teamId;
     private String position;
     private Integer overall;
     private Double bigChanceFinishing;
