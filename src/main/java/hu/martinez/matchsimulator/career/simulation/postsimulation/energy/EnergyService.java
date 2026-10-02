@@ -1,5 +1,6 @@
-package hu.martinez.matchsimulator.career.simulation.postsimulation;
+package hu.martinez.matchsimulator.career.simulation.postsimulation.energy;
 
+import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationFixtureDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationTeamDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedBenchedPlayer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedStarterPlayer;
@@ -14,7 +15,12 @@ import java.util.Random;
 @Service
 public class EnergyService {
 
-    public void handleFatigue(@Nonnull PreSimulationTeamDataContainer teamDataContainer) {
+    public void handleFatigue(@Nonnull PreSimulationFixtureDataContainer fixtureDataContainer) {
+        handleFatigueForTeam(fixtureDataContainer.homeTeamDataContainer());
+        handleFatigueForTeam(fixtureDataContainer.awayTeamDataContainer());
+    }
+
+    private void handleFatigueForTeam(@Nonnull PreSimulationTeamDataContainer teamDataContainer) {
 
         // starters
         handleFatigueForStarterPlayers(teamDataContainer.forwardList());
