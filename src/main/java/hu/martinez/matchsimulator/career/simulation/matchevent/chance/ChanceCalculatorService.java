@@ -1,4 +1,4 @@
-package hu.martinez.matchsimulator.career.simulation;
+package hu.martinez.matchsimulator.career.simulation.matchevent.chance;
 
 import jakarta.annotation.Nonnull;
 import lombok.extern.log4j.Log4j2;

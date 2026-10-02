@@ -1,5 +1,6 @@
-package hu.martinez.matchsimulator.career.simulation.postsimulation;
+package hu.martinez.matchsimulator.career.simulation.matchevent.yellowcard;
 
+import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationFixtureDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationTeamDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedStarterPlayer;
 import hu.martinez.matchsimulator.career.yellowcard.CreateYellowCard;
@@ -13,19 +14,21 @@ import java.util.Optional;
 
 @Log4j2
 @Service
-public class YellowCardService {
+public class SimulationYellowCardService {
 
     @Nonnull
-    public List<CreateYellowCard> handleYellowCards(
-            @Nonnull PreSimulationTeamDataContainer homeTeamDataContainer,
-            @Nonnull PreSimulationTeamDataContainer awayTeamDataContainer,
-            @Nonnull Integer fixtureId
-    ) {
+    public List<CreateYellowCard> handleYellowCards(@Nonnull PreSimulationFixtureDataContainer fixtureDataContainer) {
 
         List<CreateYellowCard> yellowCardList = new ArrayList<>();
 
-        yellowCardList.addAll(handleYellowCards(homeTeamDataContainer, fixtureId));
-        yellowCardList.addAll(handleYellowCards(awayTeamDataContainer, fixtureId));
+        yellowCardList.addAll(
+                handleYellowCards(
+                        fixtureDataContainer.homeTeamDataContainer(), fixtureDataContainer.simulatedFixture().getId()));
+        yellowCardList.addAll(
+                handleYellowCards(
+                        fixtureDataContainer.awayTeamDataContainer(), fixtureDataContainer.simulatedFixture().getId()));
+
+        addYellowCardsToFixture(yellowCardList, fixtureDataContainer);
 
         return yellowCardList;
     }
@@ -73,6 +76,7 @@ public class YellowCardService {
 
         if (Math.random() < chanceOfGettingYellowCard) {
             log.debug("handleYellowCardForPlayer - YELLOW for: {}", starterPlayer.getName());
+
             starterPlayer.setNumberOfYellowCards(starterPlayer.getNumberOfYellowCards() + 1);
 
             return Optional.of(new CreateYellowCard(fixtureId, starterPlayer.getTeamId(), starterPlayer.getId()));
@@ -84,6 +88,24 @@ public class YellowCardService {
         }
 
         return Optional.empty();
+    }
+
+    private void addYellowCardsToFixture(
+            @Nonnull List<CreateYellowCard> yellowCardList,
+            @Nonnull PreSimulationFixtureDataContainer fixtureDataContainer
+    ) {
+
+        for (var yellowCard : yellowCardList) {
+            if (yellowCard.teamId().equals(fixtureDataContainer.simulatedFixture().getHomeTeamId())) {
+                fixtureDataContainer.simulatedFixture().setHomeYellowCards(
+                        fixtureDataContainer.simulatedFixture().getHomeYellowCards() + 1
+                );
+            } else {
+                fixtureDataContainer.simulatedFixture().setAwayYellowCards(
+                        fixtureDataContainer.simulatedFixture().getAwayYellowCards() + 1
+                );
+            }
+        }
     }
 
 }

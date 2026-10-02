@@ -1,4 +1,4 @@
-package hu.martinez.matchsimulator.career.simulation;
+package hu.martinez.matchsimulator.career.simulation.matchevent.chance;
 
 import hu.martinez.matchsimulator.career.goal.CreateGoal;
 

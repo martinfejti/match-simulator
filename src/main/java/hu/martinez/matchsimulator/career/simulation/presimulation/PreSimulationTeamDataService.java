@@ -2,6 +2,7 @@ package hu.martinez.matchsimulator.career.simulation.presimulation;
 
 import hu.martinez.matchsimulator.career.lineup.Lineup;
 import hu.martinez.matchsimulator.career.player.Player;
+import hu.martinez.matchsimulator.career.team.Team;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,12 +18,14 @@ import java.util.Objects;
 public class PreSimulationTeamDataService {
 
     private final SimulatedPlayerMapper simulatedPlayerMapper;
+    private final SimulatedTeamMapper simulatedTeamMapper;
 
     private final GoalKeeperSavingBonusService goalKeeperSavingBonusService;
     private final TeamAverageService teamAverageService;
 
     @Nonnull
     public PreSimulationTeamDataContainer getTeamData(
+            @Nonnull Team team,
             @Nonnull String formation,
             @Nonnull List<Player> squadPlayerList,
             @Nonnull List<Lineup> starterPlayerList
@@ -83,6 +86,7 @@ public class PreSimulationTeamDataService {
 
         return new PreSimulationTeamDataContainer(
                 formation,
+                simulatedTeamMapper.map(team),
                 forwardList,
                 midfielderList,
                 defenderList,

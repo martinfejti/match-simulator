@@ -1,4 +1,4 @@
-package hu.martinez.matchsimulator.career.simulation;
+package hu.martinez.matchsimulator.career.simulation.matchevent.chance;
 
 import hu.martinez.matchsimulator.career.goal.CreateGoal;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationTeamDataContainer;
@@ -142,11 +142,15 @@ public class ChanceSimulatorService {
             if (isGoalFromBigChance(player, forwardAdhocBonus, goalKeeperAdhocBonus, goalKeeperSavingBonus)) {
                 log.info("simulatChance - GOAL for {} from a big chance", player.getName());
 
+                player.setNumberOfGoals(player.getNumberOfGoals() + 1);
+
                 return Optional.of(new CreateGoal(fixtureId, player.getTeamId(), player.getId()));
             }
         } else {
             if (isGoalFromSmallChance(player, forwardAdhocBonus, goalKeeperAdhocBonus, goalKeeperSavingBonus)) {
                 log.info("simulatChance - GOAL for {} from a small chance", player.getName());
+
+                player.setNumberOfGoals(player.getNumberOfGoals() + 1);
 
                 return Optional.of(new CreateGoal(fixtureId, player.getTeamId(), player.getId()));
             }

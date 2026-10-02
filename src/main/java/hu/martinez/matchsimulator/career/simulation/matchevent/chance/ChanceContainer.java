@@ -1,4 +1,4 @@
-package hu.martinez.matchsimulator.career.simulation;
+package hu.martinez.matchsimulator.career.simulation.matchevent.chance;
 
 public record ChanceContainer(
         Integer numberOfHomeBigChances,
