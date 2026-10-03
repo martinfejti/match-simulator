@@ -1,5 +1,6 @@
 package hu.martinez.matchsimulator.career.team;
 
+import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedTeam;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,19 @@ public class TeamService {
                 .stream()
                 .map(teamMapper::map)
                 .toList();
+    }
+
+    public void saveMatchResults(@Nonnull SimulatedTeam simulatedTeam) {
+        teamRepository.updateTeamStats(
+                simulatedTeam.getId(),
+                simulatedTeam.getMatchesPlayed(),
+                simulatedTeam.getWins(),
+                simulatedTeam.getDraws(),
+                simulatedTeam.getLosses(),
+                simulatedTeam.getGoalsScored(),
+                simulatedTeam.getGoalsConceded(),
+                simulatedTeam.getPoints()
+        );
     }
 
 }

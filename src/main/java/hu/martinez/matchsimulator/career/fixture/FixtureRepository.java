@@ -69,4 +69,37 @@ public interface FixtureRepository extends JpaRepository<FixtureEntity, Integer>
     @Query("UPDATE FixtureEntity f SET f.awayFormation = :formation WHERE f.id = :fixtureId")
     void updateAwayFormation(@Param("fixtureId") Integer fixtureId, @Param("formation") String formation);
 
+    @Modifying
+    @Query("""
+        UPDATE FixtureEntity f 
+        SET f.matchDate = :matchDate,
+            f.homeScore = :homeScore,
+            f.awayScore = :awayScore,
+            f.homeBigChances = :homeBigChances,
+            f.homeSmallChances = :homeSmallChances,
+            f.homeYellowCards = :homeYellowCards,
+            f.homeRedCards = :homeRedCards,
+            f.awayBigChances = :awayBigChances,
+            f.awaySmallChances = :awaySmallChances,
+            f.awayYellowCards = :awayYellowCards,
+            f.awayRedCards = :awayRedCards,
+            f.isFinished = :isFinished
+        WHERE f.id = :id
+    """)
+    int updateFixtureFromSimulation(
+            @Param("id") Integer id,
+            @Param("matchDate") String matchDate,
+            @Param("homeScore") Integer homeScore,
+            @Param("awayScore") Integer awayScore,
+            @Param("homeBigChances") Integer homeBigChances,
+            @Param("homeSmallChances") Integer homeSmallChances,
+            @Param("homeYellowCards") Integer homeYellowCards,
+            @Param("homeRedCards") Integer homeRedCards,
+            @Param("awayBigChances") Integer awayBigChances,
+            @Param("awaySmallChances") Integer awaySmallChances,
+            @Param("awayYellowCards") Integer awayYellowCards,
+            @Param("awayRedCards") Integer awayRedCards,
+            @Param("isFinished") Boolean isFinished
+    );
+
 }

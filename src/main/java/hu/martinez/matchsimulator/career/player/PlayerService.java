@@ -1,5 +1,7 @@
 package hu.martinez.matchsimulator.career.player;
 
+import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedBenchedPlayer;
+import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedStarterPlayer;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -58,6 +60,29 @@ public class PlayerService {
                 .stream()
                 .map(playerMapper::map)
                 .toList();
+    }
+
+    public void saveMatchResultsForStarterPlayer(@Nonnull SimulatedStarterPlayer simulatedStarterPlayer) {
+        playerRepository.updateStarterPlayerPostMatchStats(
+                simulatedStarterPlayer.getId(),
+                simulatedStarterPlayer.getEnergy(),
+                simulatedStarterPlayer.getInjuredFor(),
+                simulatedStarterPlayer.getExcludedFor(),
+                simulatedStarterPlayer.getMatchesPlayed(),
+                simulatedStarterPlayer.getNumberOfGoals(),
+                simulatedStarterPlayer.getCleanSheets(),
+                simulatedStarterPlayer.getNumberOfYellowCards(),
+                simulatedStarterPlayer.getNumberOfRedCards()
+        );
+    }
+
+    public void saveMatchResultsForBenchedPlayer(@Nonnull SimulatedBenchedPlayer simulatedBenchedPlayer) {
+        playerRepository.updateBenchedPlayerPostMatchStats(
+                simulatedBenchedPlayer.getId(),
+                simulatedBenchedPlayer.getEnergy(),
+                simulatedBenchedPlayer.getInjuredFor(),
+                simulatedBenchedPlayer.getExcludedFor()
+        );
     }
 
 }

@@ -1,5 +1,6 @@
 package hu.martinez.matchsimulator.career.fixture;
 
+import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedFixture;
 import hu.martinez.matchsimulator.career.team.Team;
 import hu.martinez.matchsimulator.career.team.TeamMapper;
 import jakarta.annotation.Nonnull;
@@ -113,6 +114,24 @@ public class FixtureService {
         } else {
             fixtureRepository.updateAwayFormation(fixtureId, formation);
         }
+    }
+
+    public void saveMatchResults(@Nonnull SimulatedFixture simulatedFixture) {
+        fixtureRepository.updateFixtureFromSimulation(
+                simulatedFixture.getId(),
+                simulatedFixture.getMatchDate(),
+                simulatedFixture.getHomeScore(),
+                simulatedFixture.getAwayScore(),
+                simulatedFixture.getHomeBigChances(),
+                simulatedFixture.getHomeSmallChances(),
+                simulatedFixture.getHomeYellowCards(),
+                simulatedFixture.getHomeRedCards(),
+                simulatedFixture.getAwayBigChances(),
+                simulatedFixture.getAwaySmallChances(),
+                simulatedFixture.getAwayYellowCards(),
+                simulatedFixture.getAwayRedCards(),
+                simulatedFixture.getIsFinished()
+        );
     }
 
 }

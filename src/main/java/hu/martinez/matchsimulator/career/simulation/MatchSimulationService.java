@@ -24,9 +24,8 @@ public class MatchSimulationService {
 
         var matchEventContainer = matchEventService.handleMatchEvents(fixtureData);
 
-        postSimulationService.handlePostSimulationTasks(fixtureData);
+        postSimulationService.handlePostSimulationTasks(fixtureData, matchEventContainer);
 
-        // TODO service to store the results and modifications!
         // store results
         // matchResultStoringService.storeMatchResult(goalsContainer, yellowCardList, redCardList, injuryList);
     }

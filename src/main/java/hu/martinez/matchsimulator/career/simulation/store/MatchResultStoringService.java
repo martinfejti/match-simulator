@@ -1,13 +1,14 @@
 package hu.martinez.matchsimulator.career.simulation.store;
 
+import hu.martinez.matchsimulator.career.fixture.FixtureService;
 import hu.martinez.matchsimulator.career.goal.CreateGoal;
 import hu.martinez.matchsimulator.career.goal.GoalService;
-import hu.martinez.matchsimulator.career.injury.CreateInjury;
 import hu.martinez.matchsimulator.career.injury.InjuryService;
-import hu.martinez.matchsimulator.career.redcard.CreateRedCard;
+import hu.martinez.matchsimulator.career.player.PlayerService;
 import hu.martinez.matchsimulator.career.redcard.RedCardService;
-import hu.martinez.matchsimulator.career.simulation.matchevent.chance.GoalsContainer;
-import hu.martinez.matchsimulator.career.yellowcard.CreateYellowCard;
+import hu.martinez.matchsimulator.career.simulation.matchevent.MatchEventContainer;
+import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationFixtureDataContainer;
+import hu.martinez.matchsimulator.career.team.TeamService;
 import hu.martinez.matchsimulator.career.yellowcard.YellowCardService;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
@@ -21,42 +22,73 @@ import java.util.List;
 @Service
 public class MatchResultStoringService {
 
+    private final FixtureService fixtureService;
     private final GoalService goalService;
     private final InjuryService injuryService;
+    private final PlayerService playerService;
     private final RedCardService redCardService;
+    private final TeamService teamService;
     private final YellowCardService yellowCardService;
 
     @Transactional
     public void storeMatchResult(
-            @Nonnull GoalsContainer goalsContainer,
-            @Nonnull List<CreateYellowCard> yellowCardList,
-            @Nonnull List<CreateRedCard> redCardList,
-            @Nonnull List<CreateInjury> injuryList
+            @Nonnull MatchEventContainer matchEventContainer,
+            @Nonnull PreSimulationFixtureDataContainer fixtureDataContainer
     ) {
 
         // goals
         List<CreateGoal> createGoalList = new ArrayList<>();
-        createGoalList.addAll(goalsContainer.homeTeamGoalList());
-        createGoalList.addAll(goalsContainer.awayTeamGoalList());
+        createGoalList.addAll(matchEventContainer.goalsContainer().homeTeamGoalList());
+        createGoalList.addAll(matchEventContainer.goalsContainer().awayTeamGoalList());
 
         if (!createGoalList.isEmpty()) {
             goalService.saveGoalsForFixture(createGoalList);
         }
 
         // yellow cards
-        if (!yellowCardList.isEmpty()) {
-            yellowCardService.saveYellowCards(yellowCardList);
+        if (!matchEventContainer.yellowCardList().isEmpty()) {
+            yellowCardService.saveYellowCards(matchEventContainer.yellowCardList());
         }
 
         // red cards
-        if (!redCardList.isEmpty()) {
-            redCardService.saveRedCards(redCardList);
+        if (!matchEventContainer.redCardList().isEmpty()) {
+            redCardService.saveRedCards(matchEventContainer.redCardList());
         }
 
         // injuries
-        if (!injuryList.isEmpty()) {
-            injuryService.saveAllInjuries(injuryList);
+        if (!matchEventContainer.injuryList().isEmpty()) {
+            injuryService.saveAllInjuries(matchEventContainer.injuryList());
         }
+
+        // fixture
+        fixtureService.saveMatchResults(fixtureDataContainer.simulatedFixture());
+
+        // teams
+        teamService.saveMatchResults(fixtureDataContainer.homeTeamDataContainer().team());
+        teamService.saveMatchResults(fixtureDataContainer.awayTeamDataContainer().team());
+
+        // starter players
+        fixtureDataContainer.homeTeamDataContainer().forwardList()
+                .forEach(playerService::saveMatchResultsForStarterPlayer);
+        fixtureDataContainer.homeTeamDataContainer().midfielderList()
+                .forEach(playerService::saveMatchResultsForStarterPlayer);
+        fixtureDataContainer.homeTeamDataContainer().defenderList()
+                .forEach(playerService::saveMatchResultsForStarterPlayer);
+        playerService.saveMatchResultsForStarterPlayer(fixtureDataContainer.homeTeamDataContainer().goalkeeper());
+
+        fixtureDataContainer.awayTeamDataContainer().forwardList()
+                .forEach(playerService::saveMatchResultsForStarterPlayer);
+        fixtureDataContainer.awayTeamDataContainer().midfielderList()
+                .forEach(playerService::saveMatchResultsForStarterPlayer);
+        fixtureDataContainer.awayTeamDataContainer().defenderList()
+                .forEach(playerService::saveMatchResultsForStarterPlayer);
+        playerService.saveMatchResultsForStarterPlayer(fixtureDataContainer.awayTeamDataContainer().goalkeeper());
+
+        // benched players
+        fixtureDataContainer.homeTeamDataContainer().benchedPlayerList()
+                .forEach(playerService::saveMatchResultsForBenchedPlayer);
+        fixtureDataContainer.awayTeamDataContainer().benchedPlayerList()
+                .forEach(playerService::saveMatchResultsForBenchedPlayer);
     }
 
 }
