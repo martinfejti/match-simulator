@@ -28,4 +28,9 @@ public class RedCardService {
                 .forEach(redCardRepository::save);
     }
 
+    @Nonnull
+    public Integer getExclusionLengthByPlayerAndFixture(@Nonnull Integer playerId, @Nonnull Integer fixtureId) {
+        return redCardRepository.getExclusionLengthByPlayerAndFixture(playerId, fixtureId);
+    }
+
 }

@@ -28,4 +28,9 @@ public class YellowCardService {
                 .forEach(yellowCardRepository::save);
     }
 
+    @Nonnull
+    public Boolean existsYellowCardByPlayerIdAndFixtureId(@Nonnull Integer playerId, @Nonnull Integer fixtureId) {
+        return yellowCardRepository.existsByPlayerIdAndFixtureId(playerId, fixtureId);
+    }
+
 }

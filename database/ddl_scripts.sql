@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS injury (
     fixture_id INTEGER NOT NULL,
     team_id INTEGER NOT NULL,
     player_id INTEGER NOT NULL,
-    missed_matches INTEGER NOT NULL DEFAULT 1, -- Hány meccset kell kihagynia
+    injury_length INTEGER NOT NULL DEFAULT 1, -- Hány meccset kell kihagynia
     FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
     FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE

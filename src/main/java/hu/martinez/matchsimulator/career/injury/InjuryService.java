@@ -28,4 +28,14 @@ public class InjuryService {
                 .forEach(injuryRepository::save);
     }
 
+    @Nonnull
+    public Integer getInjuryLengthByPlayerAndFixture(@Nonnull Integer playerId, @Nonnull Integer fixtureId) {
+        return injuryRepository.getInjuryLengthByPlayerAndFixture(playerId, fixtureId);
+    }
+
+    @Nonnull
+    public Integer countInjuriesByTeamIdAndFixtureId(@Nonnull Integer teamId, @Nonnull Integer fixtureId) {
+        return injuryRepository.countByTeamIdAndFixtureId(teamId, fixtureId);
+    }
+
 }

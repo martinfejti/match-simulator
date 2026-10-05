@@ -10,4 +10,7 @@ public interface YellowCardRepository extends JpaRepository<YellowCardEntity, In
     @Nonnull
     List<YellowCardEntity> findByPlayerId(@Nonnull Integer playerId);
 
+    @Nonnull
+    Boolean existsByPlayerIdAndFixtureId(@Nonnull Integer playerId, @Nonnull Integer fixtureId);
+
 }

@@ -99,3 +99,45 @@ CREATE TABLE IF NOT EXISTS match_lineup (
     -- Egy játékos egy adott meccsen csak egyszer szerepelhet a keretben
     UNIQUE (fixture_id, player_id)
 );
+
+CREATE TABLE IF NOT EXISTS goal (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,               -- Melyik csapat szerezte
+    player_id INTEGER NOT NULL,             -- Gólszerző játékos
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS yellow_card (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS red_card (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    exclusion_length INTEGER NOT NULL,
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS injury (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fixture_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    injury_length INTEGER NOT NULL DEFAULT 1, -- Hány meccset kell kihagynia
+    FOREIGN KEY (fixture_id) REFERENCES fixture(id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES player(id) ON DELETE CASCADE
+);

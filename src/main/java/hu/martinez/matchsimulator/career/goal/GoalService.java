@@ -30,4 +30,9 @@ public class GoalService {
         );
     }
 
+    @Nonnull
+    public Integer countGoalsByPlayerIdAndFixtureId(@Nonnull Integer playerId, @Nonnull Integer fixtureId) {
+        return goalRepository.countByPlayerIdAndFixtureId(playerId, fixtureId);
+    }
+
 }

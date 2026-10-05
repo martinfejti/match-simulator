@@ -83,7 +83,11 @@
                                 <span class="score-container">
                                     <c:choose>
                                         <c:when test="${fixture.isFinished()}">
-                                            ${fixture.homeScore()} - ${fixture.awayScore()}
+                                            <c:url var="matchResultUrl" value="/career/match-result/get-match-result">
+                                                <c:param name="fixtureId" value="${fixture.id()}"/>
+                                            </c:url>
+                                            <a href="${matchResultUrl}">${fixture.homeScore()} - ${fixture.awayScore()}</a>
+                                            
                                         </c:when>
                                         <c:otherwise>
                                             -

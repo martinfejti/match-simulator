@@ -3,6 +3,7 @@ package hu.martinez.matchsimulator.career.simulation;
 import hu.martinez.matchsimulator.career.simulation.matchevent.MatchEventService;
 import hu.martinez.matchsimulator.career.simulation.postsimulation.PostSimulationService;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationFixtureDataService;
+import hu.martinez.matchsimulator.career.simulation.store.MatchResultStoringService;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class MatchSimulationService {
 
     private final MatchEventService matchEventService;
+    private final MatchResultStoringService matchResultStoringService;
     private final PostSimulationService postSimulationService;
     private final PreSimulationFixtureDataService preSimulationFixtureDataService;
 
@@ -27,7 +29,7 @@ public class MatchSimulationService {
         postSimulationService.handlePostSimulationTasks(fixtureData, matchEventContainer);
 
         // store results
-        // matchResultStoringService.storeMatchResult(goalsContainer, yellowCardList, redCardList, injuryList);
+        matchResultStoringService.storeMatchResult(matchEventContainer, fixtureData);
     }
 
 }

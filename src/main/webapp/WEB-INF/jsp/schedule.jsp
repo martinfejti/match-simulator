@@ -92,8 +92,13 @@
                                 <c:choose>
                                     <c:when test="${fixture.isFinished()}">
                                         <div class="result-cell">
+                                            <c:url var="matchResultUrl" value="/career/match-result/get-match-result">
+                                                <c:param name="fixtureId" value="${fixture.id()}"/>
+                                            </c:url>
                                             <!-- Eredmény szövege -->
-                                            <span class="result-score">${fixture.homeScore()} - ${fixture.awayScore()}</span>
+                                            <a href="${matchResultUrl}">
+                                                <span class="result-score">${fixture.homeScore()} - ${fixture.awayScore()}</span>
+                                            </a>
 
                                             <!-- Kimenetelek (W / D / L) kiszámítása a kiválasztott csapat szempontjából -->
                                             <c:set var="isHome" value="${fixture.homeTeam().id() == selectedTeam.id()}" />

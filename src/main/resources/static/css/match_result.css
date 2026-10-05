@@ -1,0 +1,416 @@
+/* ==========================================================================
+   MATCH RESULTS - EGYEDI TELJES KÉPERNYŐS COMPACT STÍLUS
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-image: url('/images/background.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #082032;
+    color: #333;
+}
+
+.match-results-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   NAVBAR
+   -------------------------------------------------------------------------- */
+.preview-menubar {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    border-radius: 6px;
+    border: 1px solid #003366;
+    padding: 6px 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.preview-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.preview-nav-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.preview-nav-links li a:hover {
+    color: #ffeb3b;
+}
+
+/* --------------------------------------------------------------------------
+   DOBOZOK ALAPSTÍLUSA
+   -------------------------------------------------------------------------- */
+.preview-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #1e90ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-header {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #003366;
+}
+
+.box-header-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffeb3b;
+    letter-spacing: 0.5px;
+}
+
+.match-date-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e0f2fe;
+}
+
+/* --------------------------------------------------------------------------
+   FELSŐ DOBOZ - MATCH BANNER / SCORE
+   -------------------------------------------------------------------------- */
+.match-banner-box .banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(224,242,254,0.9) 100%);
+}
+
+.team-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.home-profile { justify-content: flex-start; }
+.away-profile { justify-content: flex-end; }
+
+.team-details { display: flex; flex-direction: column; }
+.team-details.align-right { text-align: right; }
+
+.team-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: #002244;
+    letter-spacing: 0.5px;
+}
+
+.score-container {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-badge {
+    background: linear-gradient(to bottom, #002244 0%, #001122 100%);
+    color: #ffeb3b;
+    border: 2px solid #1e90ff;
+    padding: 8px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+
+.score-text {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   KÖZÉPSŐ DOBOZ - STARTING LINEUPS & EVENTS
+   -------------------------------------------------------------------------- */
+.lineups-content {
+    display: flex;
+    padding: 12px;
+    gap: 15px;
+    background-color: #ffffff;
+}
+
+.lineup-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lineup-divider {
+    width: 2px;
+    background: linear-gradient(to bottom, #e0e8f5 0%, #1e90ff 50%, #e0e8f5 100%);
+}
+
+.team-lineup-header {
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.team-lineup-header.align-right { justify-content: flex-end; }
+.formation-text { color: #ffeb3b; font-size: 12px; }
+
+/* Kompakt játékos lista */
+.player-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.player-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 8px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+    transition: background-color 0.15s ease;
+}
+
+.player-row-item:nth-child(even) { background-color: #edf2f7; }
+.player-row-item:hover { background-color: #e2e8f0; }
+
+.player-info-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-info-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-row-item.reverse-row { flex-direction: row; }
+
+.position-badge {
+    background-color: #002244;
+    color: #ffeb3b;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 3px;
+    min-width: 32px;
+    text-align: center;
+    display: inline-block;
+}
+
+.shirt-badge {
+    background-color: #1e90ff;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 3px;
+    min-width: 22px;
+    text-align: center;
+    display: inline-block;
+}
+
+.flag-img {
+    width: 16px;
+    height: 11px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+}
+
+.player-fullname {
+    font-size: 12px;
+    font-weight: 600;
+    color: #002244;
+}
+
+.overall-badge {
+    background-color: #e3f2fd;
+    color: #003366;
+    border: 1px solid #90caf9;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   ESEMÉNY IKONOK (Gól, Lapok, Sérülés)
+   -------------------------------------------------------------------------- */
+.player-events-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Fekete-fehér labda ikon gólhoz */
+.ball-icon {
+    color: #111;
+    font-size: 12px;
+    margin-right: 1px;
+}
+
+/* Kártyák (Sárga / Piros) */
+.card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 16px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.yellow-card {
+    background-color: #ffcc00;
+    border: 1px solid #d4a000;
+}
+
+.red-card {
+    background-color: #e53935;
+    border: 1px solid #b71c1c;
+}
+
+.inline-card {
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+/* Sérülés piros kereszt eleme */
+.injury-badge {
+    background-color: #e53935;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.injury-count {
+    font-size: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   DETAILED MATCH STATS DOBOZ (Kép alapján)
+   -------------------------------------------------------------------------- */
+.stats-header {
+    background: linear-gradient(to bottom, #0088cc 0%, #005580 100%);
+}
+
+.stats-content {
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.stats-table tr {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.stats-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.stats-table tr:hover {
+    background-color: #f1f5f9;
+}
+
+.stat-value {
+    width: 40%;
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #1e3a8a;
+}
+
+.stat-value.home-val {
+    text-align: left;
+    font-weight: 500;
+}
+
+.stat-value.away-val {
+    text-align: right;
+    font-weight: 500;
+}
+
+.stat-label {
+    width: 20%;
+    text-align: center;
+    font-weight: 600;
+    color: #64748b;
+    padding: 8px 10px;
+    border-left: 1px solid #f1f5f9;
+    border-right: 1px solid #f1f5f9;
+}
+
+/* Recent performance kerek ikonok (W / L / D) */
+.perf-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.perf-badge.W {
+    background-color: #2e7d32;
+}
+
+.perf-badge.L {
+    background-color: #c62828;
+}
+
+.perf-badge.D {
+    background-color: #f57c00;
+}
