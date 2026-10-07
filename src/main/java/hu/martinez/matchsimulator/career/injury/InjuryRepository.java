@@ -27,4 +27,7 @@ public interface InjuryRepository extends JpaRepository<InjuryEntity, Integer> {
     @Nonnull
     Integer countByTeamIdAndFixtureId(@Nonnull Integer teamId, @Nonnull Integer fixtureId);
 
+    @Nonnull
+    List<InjuryEntity> findByFixtureId(@Nonnull Integer fixtureId);
+
 }

@@ -33,4 +33,12 @@ public class YellowCardService {
         return yellowCardRepository.existsByPlayerIdAndFixtureId(playerId, fixtureId);
     }
 
+    @Nonnull
+    public List<YellowCard> getAllYellowCardsByFixtureId(@Nonnull Integer fixtureId) {
+        return yellowCardRepository.findByFixtureId(fixtureId)
+                .stream()
+                .map(yellowCardMapper::map)
+                .toList();
+    }
+
 }

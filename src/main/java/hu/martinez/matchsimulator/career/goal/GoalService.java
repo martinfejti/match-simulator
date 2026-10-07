@@ -35,4 +35,12 @@ public class GoalService {
         return goalRepository.countByPlayerIdAndFixtureId(playerId, fixtureId);
     }
 
+    @Nonnull
+    public List<Goal> getAllGoalsByFixtureId(@Nonnull Integer fixtureId) {
+        return goalRepository.findByFixtureId(fixtureId)
+                .stream()
+                .map(goalMapper::map)
+                .toList();
+    }
+
 }

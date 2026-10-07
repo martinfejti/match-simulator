@@ -33,4 +33,12 @@ public class RedCardService {
         return redCardRepository.getExclusionLengthByPlayerAndFixture(playerId, fixtureId);
     }
 
+    @Nonnull
+    public List<RedCard> getAllRedCardsByFixtureId(@Nonnull Integer fixtureId) {
+        return redCardRepository.findByFixtureId(fixtureId)
+                .stream()
+                .map(redCardMapper::map)
+                .toList();
+    }
+
 }

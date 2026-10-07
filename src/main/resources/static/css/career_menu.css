@@ -188,3 +188,15 @@ body {
     color: #003366;
     border: 1px solid #d0e0f0;
 }
+
+.result-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.result-link:hover,
+.result-link:focus,
+.result-link:visited {
+    text-decoration: none;
+    color: inherit;
+}

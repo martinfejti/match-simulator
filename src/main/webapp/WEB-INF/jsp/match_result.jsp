@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +55,99 @@
             </div>
         </div>
 
+        <!-- ÚJ DOBOZ: Key Match Events (Események Doboz) -->
+        <div class="preview-box events-box">
+            <div class="box-header events-header">
+                <span class="box-header-title">${fixture.homeTeam().name()}</span>
+                <span class="box-header-title center-title">Match Events</span>
+                <span class="box-header-title align-right">${fixture.awayTeam().name()}</span>
+            </div>
+
+            <div class="box-content events-content">
+                <c:choose>
+                    <c:when test="${not empty matchEventList}">
+                        <ul class="events-list">
+                            <c:forEach var="event" items="${matchEventList}">
+                                <li class="event-row">
+                                    <!-- HAZAI OLDAL -->
+                                    <div class="event-side home-event-side">
+                                        <c:if test="${event.isHomeTeam()}">
+                                            <span class="event-player-name">${event.playerName()}</span>
+
+                                            <!-- Ikon megjelenítés esemény típusa alapján -->
+                                            <c:choose>
+                                                <c:when test="${event.eventType() == 'Goal'}">
+                                                    <i class="fa-solid fa-futbol match-icon ball-icon" title="Goal"></i>
+                                                </c:when>
+                                                <c:when test="${event.eventType() == 'Yellow Card'}">
+                                                    <span class="card-icon yellow-card" title="Yellow Card"></span>
+                                                </c:when>
+                                                <c:when test="${event.eventType() == 'Red Card'}">
+                                                    <span class="card-icon red-card" title="Red Card (${event.exclusionLength()} match ban)">
+                                                        <c:if test="${not empty event.exclusionLength() && event.exclusionLength() > 0}">${event.exclusionLength()}</c:if>
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${event.eventType() == 'Injury'}">
+                                                    <span class="injury-badge" title="Injured (${event.injuryLength()} matches out)">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                        <c:if test="${not empty event.injuryLength() && event.injuryLength() > 0}">
+                                                            <span class="injury-count">${event.injuryLength()}</span>
+                                                        </c:if>
+                                                    </span>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:if>
+                                    </div>
+
+                                    <!-- KÖZÉPSŐ ESEMÉNY TÍPUS -->
+                                    <div class="event-type-badge">
+                                        <span>${event.eventType()}</span>
+                                    </div>
+
+                                    <!-- VENDÉG OLDAL -->
+                                    <div class="event-side away-event-side">
+                                        <c:if test="${!event.isHomeTeam()}">
+                                            <!-- Ikon megjelenítés esemény típusa alapján -->
+                                            <c:choose>
+                                                <c:when test="${event.eventType() == 'Goal'}">
+                                                    <i class="fa-solid fa-futbol match-icon ball-icon" title="Goal"></i>
+                                                </c:when>
+                                                <c:when test="${event.eventType() == 'Yellow Card'}">
+                                                    <span class="card-icon yellow-card" title="Yellow Card"></span>
+                                                </c:when>
+                                                <c:when test="${event.eventType() == 'Red Card'}">
+                                                    <span class="card-icon red-card" title="Red Card (${event.exclusionLength()} match ban)">
+                                                        <c:if test="${not empty event.exclusionLength() && event.exclusionLength() > 0}">${event.exclusionLength()}</c:if>
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${event.eventType() == 'Injury'}">
+                                                    <span class="injury-badge" title="Injured (${event.injuryLength()} matches out)">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                        <c:if test="${not empty event.injuryLength() && event.injuryLength() > 0}">
+                                                            <span class="injury-count">${event.injuryLength()}</span>
+                                                        </c:if>
+                                                    </span>
+                                                </c:when>
+                                            </c:choose>
+
+                                            <span class="event-player-name">${event.playerName()}</span>
+                                        </c:if>
+                                    </div>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="no-events-msg">No major match events recorded.</div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+
         <!-- KÖZÉPSŐ DOBOZ: Kezdőcsapatok és Meccs-események -->
         <div class="preview-box lineups-box">
             <div class="box-header">
-                <span class="box-header-title">Match Lineups & Match Events</span>
+                <span class="box-header-title">Match Lineups</span>
             </div>
 
             <div class="box-content lineups-content">
@@ -199,11 +289,19 @@
                         <!-- Recent performance -->
                         <tr>
                             <td class="stat-value home-val">
-                                <span class="perf-badge W">W</span>
+                                <c:forEach var="form" items="${recentFormContainer.homeFormList()}">
+                                    <span class="perf-badge ${form.outcome()}" title="${form.details()}">
+                                        ${form.outcome()}
+                                    </span>
+                                </c:forEach>
                             </td>
                             <td class="stat-label">Recent performance</td>
                             <td class="stat-value away-val">
-                                <span class="perf-badge L">L</span>
+                                <c:forEach var="form" items="${recentFormContainer.awayFormList()}">
+                                    <span class="perf-badge ${form.outcome()}" title="${form.details()}">
+                                        ${form.outcome()}
+                                    </span>
+                                </c:forEach>
                             </td>
                         </tr>
                         <!-- Formation -->
@@ -211,6 +309,12 @@
                             <td class="stat-value home-val">${fixture.homeFormation()}</td>
                             <td class="stat-label">Formation</td>
                             <td class="stat-value away-val">${fixture.awayFormation()}</td>
+                        </tr>
+                        <!-- Average -->
+                        <tr>
+                            <td class="stat-value home-val"><fmt:formatNumber value="${averageContainer.homeTeamAverage()}" pattern="#.##" /></td>
+                            <td class="stat-label">Average</td>
+                            <td class="stat-value away-val"><fmt:formatNumber value="${averageContainer.awayTeamAverage()}" pattern="#.##" /></td>
                         </tr>
                         <!-- Big chances -->
                         <tr>

@@ -96,7 +96,7 @@
                                                 <c:param name="fixtureId" value="${fixture.id()}"/>
                                             </c:url>
                                             <!-- Eredmény szövege -->
-                                            <a href="${matchResultUrl}">
+                                            <a href="${matchResultUrl}" class="result-cell-link">
                                                 <span class="result-score">${fixture.homeScore()} - ${fixture.awayScore()}</span>
                                             </a>
 

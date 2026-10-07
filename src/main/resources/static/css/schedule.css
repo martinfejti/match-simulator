@@ -169,6 +169,18 @@
     gap: 8px;
 }
 
+.result-cell-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.result-cell-link:hover,
+.result-cell-link:focus,
+.result-cell-link:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
 .result-score {
     font-weight: bold;
     color: #003366;

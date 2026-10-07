@@ -89,6 +89,15 @@ body {
     letter-spacing: 0.5px;
 }
 
+.box-header-title.center-title {
+    text-align: center;
+    flex: 1;
+}
+
+.box-header-title.align-right {
+    text-align: right;
+}
+
 .match-date-badge {
     font-size: 13px;
     font-weight: 600;
@@ -146,6 +155,85 @@ body {
     font-size: 28px;
     font-weight: 900;
     letter-spacing: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   ÚJ DOBOZ - MATCH EVENTS (Események)
+   -------------------------------------------------------------------------- */
+.events-header {
+    /* background: linear-gradient(to bottom, #0056b3 0%, #003366 100%); */
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
+    display: grid;
+    grid-template-columns: 1fr 120px 1fr;
+    padding: 8px 20px;
+}
+
+.events-content {
+    background-color: #ffffff;
+    padding: 8px 0;
+}
+
+.events-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 1fr;
+    align-items: center;
+    padding: 6px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.event-row:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.event-row:last-child {
+    border-bottom: none;
+}
+
+.event-side {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #002244;
+}
+
+.home-event-side {
+    justify-content: flex-end;
+}
+
+.away-event-side {
+    justify-content: flex-start;
+}
+
+.event-player-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.event-type-badge {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e90ff;
+    letter-spacing: 0.5px;
+}
+
+.no-events-msg {
+    text-align: center;
+    padding: 12px;
+    color: #64748b;
+    font-size: 13px;
+    font-style: italic;
 }
 
 /* --------------------------------------------------------------------------
@@ -337,7 +425,8 @@ body {
    DETAILED MATCH STATS DOBOZ (Kép alapján)
    -------------------------------------------------------------------------- */
 .stats-header {
-    background: linear-gradient(to bottom, #0088cc 0%, #005580 100%);
+    /* background: linear-gradient(to bottom, #0088cc 0%, #005580 100%); */
+    background: linear-gradient(to bottom, #1e90ff 0%, #0056b3 100%);
 }
 
 .stats-content {

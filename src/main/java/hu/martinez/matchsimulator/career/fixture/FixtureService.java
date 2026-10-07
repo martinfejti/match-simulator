@@ -6,6 +6,7 @@ import hu.martinez.matchsimulator.career.team.TeamMapper;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -101,6 +102,14 @@ public class FixtureService {
         var lastFixture = fixtureRepository.findLastFinishedFixtureForTeam(teamMapper.mapToEntity(team));
 
         return lastFixture.map(fixtureMapper::map);
+    }
+
+    @Nonnull
+    public List<Fixture> getRecentFixturesForTeam(@Nonnull Integer teamId, @Nonnull Integer currentMatchWeek) {
+        return fixtureRepository.findRecentFixturesForTeam(teamId, currentMatchWeek, PageRequest.of(0, 5))
+                .stream()
+                .map(fixtureMapper::map)
+                .toList();
     }
 
     public void saveFormation(

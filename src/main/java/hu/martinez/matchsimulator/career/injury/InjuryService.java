@@ -38,4 +38,12 @@ public class InjuryService {
         return injuryRepository.countByTeamIdAndFixtureId(teamId, fixtureId);
     }
 
+    @Nonnull
+    public List<Injury> getAllInjuriesByFixtureId(@Nonnull Integer fixtureId) {
+        return injuryRepository.findByFixtureId(fixtureId)
+                .stream()
+                .map(injuryMapper::map)
+                .toList();
+    }
+
 }

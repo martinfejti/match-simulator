@@ -13,4 +13,7 @@ public interface GoalRepository extends JpaRepository<GoalEntity, Integer> {
     @Nonnull
     Integer countByPlayerIdAndFixtureId(@Nonnull Integer playerId, @Nonnull Integer fixtureId);
 
+    @Nonnull
+    List<GoalEntity> findByFixtureId(@Nonnull Integer fixtureId);
+
 }

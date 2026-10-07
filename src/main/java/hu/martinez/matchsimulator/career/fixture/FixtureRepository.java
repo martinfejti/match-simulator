@@ -2,6 +2,7 @@ package hu.martinez.matchsimulator.career.fixture;
 
 import hu.martinez.matchsimulator.career.team.TeamEntity;
 import jakarta.annotation.Nonnull;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -100,6 +101,19 @@ public interface FixtureRepository extends JpaRepository<FixtureEntity, Integer>
             @Param("awayYellowCards") Integer awayYellowCards,
             @Param("awayRedCards") Integer awayRedCards,
             @Param("isFinished") Boolean isFinished
+    );
+
+    @Query("""
+        SELECT f FROM FixtureEntity f 
+        WHERE f.isFinished = true 
+          AND f.matchWeek <= :currentMatchWeek
+          AND (f.homeTeam.id = :teamId OR f.awayTeam.id = :teamId)
+        ORDER BY f.matchWeek DESC, f.matchNumberInWeek DESC
+    """)
+    List<FixtureEntity> findRecentFixturesForTeam(
+            @Param("teamId") Integer teamId,
+            @Param("currentMatchWeek") Integer currentMatchWeek,
+            Pageable pageable
     );
 
 }

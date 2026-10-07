@@ -23,4 +23,7 @@ public interface RedCardRepository extends JpaRepository<RedCardEntity, Integer>
             @Param("fixtureId") Integer fixtureId
     );
 
+    @Nonnull
+    List<RedCardEntity> findByFixtureId(@Nonnull Integer fixtureId);
+
 }

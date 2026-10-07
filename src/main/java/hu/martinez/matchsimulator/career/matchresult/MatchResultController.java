@@ -21,12 +21,6 @@ public class MatchResultController {
     @GetMapping("/get-match-result")
     public String getMatchResult(@Nonnull Integer fixtureId, @Nonnull Model model) {
 
-        // TODO the match events need an own separate box between the score and the lineups
-        // TODO team average as statistics in the last box
-        // TODO add match result links to every possibility and remove the default underline
-        // TODO handle team forms in the statistics
-        // TODO handle the redirect calling of this endpoint from the match simulation controller!
-
         var fixture = fixtureService.getFixtureById(fixtureId);
 
         var homeTeamPlayerList = matchResultService.getMatchResultPlayerList(fixtureId, fixture.homeTeam().id());
@@ -41,6 +35,15 @@ public class MatchResultController {
         var awayInjuriesCount = injuryService.countInjuriesByTeamIdAndFixtureId(fixture.awayTeam().id(), fixtureId);
         model.addAttribute("homeInjuriesCount", homeInjuriesCount);
         model.addAttribute("awayInjuriesCount", awayInjuriesCount);
+
+        var matchEventList = matchResultService.getMatchResultEventList(fixtureId);
+        model.addAttribute("matchEventList", matchEventList);
+
+        var averageContainer = matchResultService.getStartingElevenAverages(fixtureId);
+        model.addAttribute("averageContainer", averageContainer);
+
+        var recentFormContainer = matchResultService.getRecentForms(fixtureId);
+        model.addAttribute("recentFormContainer", recentFormContainer);
 
         return "match_result";
     }
