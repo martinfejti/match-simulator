@@ -1,6 +1,7 @@
 package hu.martinez.matchsimulator.career.standing;
 
 import hu.martinez.matchsimulator.career.fixture.FixtureService;
+import hu.martinez.matchsimulator.career.player.PlayerService;
 import hu.martinez.matchsimulator.career.team.Team;
 import hu.martinez.matchsimulator.career.team.TeamService;
 import jakarta.annotation.Nonnull;
@@ -14,6 +15,8 @@ import java.util.List;
 public class StandingsService {
 
     private final FixtureService fixtureService;
+    private final PlayerService playerService;
+    private final StandingsPlayerStatisticsMapper standingsPlayerStatisticsMapper;
     private final TeamService teamService;
 
     @Nonnull
@@ -40,6 +43,16 @@ public class StandingsService {
                     );
                 })
                 .toList();
+    }
+
+    @Nonnull
+    public StandingsPlayerStatisticsContainer getPlayerStatistics() {
+        return new StandingsPlayerStatisticsContainer(
+                standingsPlayerStatisticsMapper.mapGoalScorers(playerService.getTopGoalscorersList()),
+                standingsPlayerStatisticsMapper.mapCleanSheets(playerService.getTopCleanSheetsList()),
+                standingsPlayerStatisticsMapper.mapYellowCards(playerService.getTopYellowCardsList()),
+                standingsPlayerStatisticsMapper.mapRedCards(playerService.getTopRedCardsList())
+        );
     }
 
     @Nonnull

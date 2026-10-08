@@ -1,5 +1,6 @@
 package hu.martinez.matchsimulator.career.player;
 
+import jakarta.annotation.Nonnull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -51,6 +52,22 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
         ORDER BY p.lastName ASC
     """)
     List<PlayerEntity> findForwardsByTeamId(@Param("teamId") Integer teamId);
+
+    @Nonnull
+    @Query("SELECT p FROM PlayerEntity p WHERE p.numberOfGoals > 0 ORDER BY p.numberOfGoals DESC, p.lastName ASC LIMIT 15")
+    List<PlayerEntity> findTop15GoalScorers();
+
+    @Nonnull
+    @Query("SELECT p FROM PlayerEntity p WHERE p.cleanSheets > 0 ORDER BY p.cleanSheets DESC, p.lastName ASC LIMIT 15")
+    List<PlayerEntity> findTop15CleanSheets();
+
+    @Nonnull
+    @Query("SELECT p FROM PlayerEntity p WHERE p.numberOfYellowCards > 0 ORDER BY p.numberOfYellowCards DESC, p.lastName ASC LIMIT 15")
+    List<PlayerEntity> findTop15YellowCards();
+
+    @Nonnull
+    @Query("SELECT p FROM PlayerEntity p WHERE p.numberOfRedCards > 0 ORDER BY p.numberOfRedCards DESC, p.lastName ASC LIMIT 15")
+    List<PlayerEntity> findTop15RedCards();
 
     @Modifying
     @Query("""

@@ -62,6 +62,38 @@ public class PlayerService {
                 .toList();
     }
 
+    @Nonnull
+    public List<Player> getTopGoalscorersList() {
+        return playerRepository.findTop15GoalScorers()
+                .stream()
+                .map(playerMapper::map)
+                .toList();
+    }
+
+    @Nonnull
+    public List<Player> getTopCleanSheetsList() {
+        return playerRepository.findTop15CleanSheets()
+                .stream()
+                .map(playerMapper::map)
+                .toList();
+    }
+
+    @Nonnull
+    public List<Player> getTopYellowCardsList() {
+        return playerRepository.findTop15YellowCards()
+                .stream()
+                .map(playerMapper::map)
+                .toList();
+    }
+
+    @Nonnull
+    public List<Player> getTopRedCardsList() {
+        return playerRepository.findTop15RedCards()
+                .stream()
+                .map(playerMapper::map)
+                .toList();
+    }
+
     public void saveMatchResultsForStarterPlayer(@Nonnull SimulatedStarterPlayer simulatedStarterPlayer) {
         playerRepository.updateStarterPlayerPostMatchStats(
                 simulatedStarterPlayer.getId(),

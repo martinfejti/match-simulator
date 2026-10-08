@@ -1,9 +1,10 @@
 package hu.martinez.matchsimulator.career.standing;
 
-public record Goalscorer(
+public record StandingsYellowCard(
         Integer playerId,
         String playerName,
+        String nationality,
         String teamName,
-        Integer goals
+        Integer numberOfYellowCards
 ) {
 }
