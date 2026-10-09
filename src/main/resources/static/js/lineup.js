@@ -242,7 +242,7 @@ function saveLineup() {
 
     for (const [slotIndex, playerId] of Object.entries(currentLineup)) {
         const zone = document.querySelector(`.drop-zone[data-slot-index='${slotIndex}']`);
-        const posRole = zone ? zone.dataset.positionRole : "SUB"; // TODO: filter the subs, only starters should be stored!!!
+        const posRole = zone ? zone.dataset.positionRole : "SUB";
 
         payload.push({
             fixtureId: parseInt(fixtureId),

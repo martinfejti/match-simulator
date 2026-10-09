@@ -34,6 +34,8 @@ public class LineupService {
         );
 
         createLineup.starterPlayerList()
+                .stream()
+                .filter(player -> !"SUB".equals(player.position()))
                 .forEach(
                         player -> lineupRepository.save(
                                 lineupMapper.mapToEntity(player)

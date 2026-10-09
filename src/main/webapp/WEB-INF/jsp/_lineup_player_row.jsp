@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<c:set var="isUnavailable" value="${p.injuredFor() > 0 || p.excludedFor() > 0 || p.energy() < 30}" />
+<c:set var="isUnavailable" value="${p.injuredFor() > 0 || p.excludedFor() > 0 || p.energy() < 20}" />
 
 <tr id="player-row-${p.id()}"
     class="player-row ${isUnavailable ? 'row-disabled' : ''}"
@@ -71,8 +71,8 @@
             <c:when test="${p.excludedFor() > 0}">
                 <span class="red-card-badge" title="Suspended for ${p.excludedFor()} match(es)">${p.excludedFor()}</span>
             </c:when>
-            <c:when test="${p.energy() < 30}">
-                <span class="injury-badge" title="Player is too tired! Energy is below 30">T</span>
+            <c:when test="${p.energy() < 20}">
+                <span class="injury-badge" title="Player is too tired! Energy is below 20">T</span>
             </c:when>
             <c:otherwise>-</c:otherwise>
         </c:choose>

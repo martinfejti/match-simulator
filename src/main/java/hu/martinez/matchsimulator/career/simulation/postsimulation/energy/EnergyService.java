@@ -38,8 +38,12 @@ public class EnergyService {
 
     private void handleFatigueForStarterPlayer(@Nonnull SimulatedStarterPlayer starterPlayer) {
 
-        // TODO en case of goalkeeper, this should be the half of it!
-        var energyLoss = new Random().nextInt(16) + 10; // random number between 10 and 25
+        Integer energyLoss;
+        if ("GK".equals(starterPlayer.getPosition())) {
+            energyLoss = new Random().nextInt(5) + 1; // random number between 1 and 5
+        } else {
+            energyLoss = new Random().nextInt(11) + 10; // random number between 10 and 20
+        }
 
         starterPlayer.setEnergy(starterPlayer.getEnergy() - energyLoss);
 
