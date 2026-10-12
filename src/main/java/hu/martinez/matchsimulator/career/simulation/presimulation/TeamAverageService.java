@@ -15,22 +15,24 @@ public class TeamAverageService {
             @Nonnull List<SimulatedStarterPlayer> defenderList,
             @Nonnull SimulatedStarterPlayer goalKeeper
     ) {
-        return (
-                getPositionAverage(forwardList)
-                + getPositionAverage(midfielderList)
-                + getPositionAverage(defenderList)
-                + goalKeeper.getOverall().doubleValue()
-        ) / 4;
-    }
 
-    @Nonnull
-    private Double getPositionAverage(@Nonnull List<SimulatedStarterPlayer> starterPlayerList) {
-        return starterPlayerList
-                .stream()
-                .map(SimulatedStarterPlayer::getOverall)
-                .reduce(Integer::sum)
-                .orElseThrow()
-                .doubleValue()/ starterPlayerList.size();
+        var sum = 0.0;
+
+        for (var player : forwardList) {
+            sum += player.getOverall();
+        }
+
+        for (var player : midfielderList) {
+            sum += player.getOverall();
+        }
+
+        for (var player : defenderList) {
+            sum += player.getOverall();
+        }
+
+        sum += goalKeeper.getOverall();
+
+        return sum / 11;
     }
 
 }

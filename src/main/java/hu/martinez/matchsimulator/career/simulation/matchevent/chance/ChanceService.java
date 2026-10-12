@@ -18,7 +18,8 @@ public class ChanceService {
     public GoalsContainer handleChances(@Nonnull PreSimulationFixtureDataContainer fixtureDataContainer) {
 
         // chances
-        var chanceContainer = chanceCalculatorService.calculateChances(
+        var chanceContainer = chanceCalculatorService.calculateChancesV2(
+                fixtureDataContainer,
                 fixtureDataContainer.homeTeamDataContainer().teamAverage(),
                 fixtureDataContainer.awayTeamDataContainer().teamAverage()
         );

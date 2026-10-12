@@ -15,6 +15,8 @@ public class SimulatedPlayerMapper {
                 squadPlayer.lastName(),
                 squadPlayer.teamId(),
                 starterPlayer.position(),
+                squadPlayer.primaryPosition(),
+                squadPlayer.otherPositions(),
                 squadPlayer.overall(),
                 squadPlayer.bigChanceFinishing().doubleValue() / 100.0,
                 squadPlayer.smallChanceFinishing().doubleValue() / 100.0,
