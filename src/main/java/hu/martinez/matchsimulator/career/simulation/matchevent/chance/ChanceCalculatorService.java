@@ -17,8 +17,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChanceCalculatorService {
 
     // Egy átlagos csapat alapértékei egyenlő képességű ellenfél ellen
-    private static final double BASE_SMALL_CHANCES = 6.5;
-    private static final double BASE_BIG_CHANCES = 1.8;
+    private static final double BASE_SMALL_CHANCES = 8.5;
+    private static final double BASE_BIG_CHANCES = 3.0;
 
     // Hazai pálya szorzók (Multiplikatív zárt modell)
     private static final double HOME_ADVANTAGE_MULT = 1.10; // +10%

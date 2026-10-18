@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GoalKeeperSavingBonusService {
 
-    private static final Double BONUS_RATIO = 200.0; // TODO maybe still a bit low --> higher here means smaller bonus
+    private static final Double BONUS_RATIO = 100.0;
 
     @Nonnull
     public Double getBonus(@Nonnull SimulatedStarterPlayer goalKeeper) {

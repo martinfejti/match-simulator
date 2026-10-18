@@ -31,7 +31,8 @@ public class GoalSimulationService {
         List<Optional<CreateGoal>> homeGoalList = new ArrayList<>();
 
         homePlayerAndChanceList.forEach(
-                playerAndChance -> homeGoalList.add(simulateChance(
+                playerAndChance -> homeGoalList.add(
+                        simulateChance(
                                 playerAndChance,
                                 fixtureDataContainer.simulatedFixture().getId(),
                                 fixtureDataContainer.awayTeamDataContainer().goalKeeperSaveBonus()
@@ -43,11 +44,13 @@ public class GoalSimulationService {
         List<Optional<CreateGoal>> awayGoalList = new ArrayList<>();
 
         awayPlayerAndChanceList.forEach(
-                playerAndChance -> awayGoalList.add(simulateChance(
-                        playerAndChance,
-                        fixtureDataContainer.simulatedFixture().getId(),
-                        fixtureDataContainer.homeTeamDataContainer().goalKeeperSaveBonus()
-                ))
+                playerAndChance -> awayGoalList.add(
+                        simulateChance(
+                                playerAndChance,
+                                fixtureDataContainer.simulatedFixture().getId(),
+                                fixtureDataContainer.homeTeamDataContainer().goalKeeperSaveBonus()
+                        )
+                )
         );
 
         return new GoalsContainer(
@@ -71,16 +74,8 @@ public class GoalSimulationService {
             @Nonnull Double goalKeeperSavingBonus
     ) {
 
-        var forwardAdhocBonus = Math.random() / 10;
-        var goalKeeperAdhocBonus = Math.random() / 10;
-
         if (playerAndChance.isBigChance()) {
-            if (isGoalFromBigChance(
-                    playerAndChance.player(),
-                    forwardAdhocBonus,
-                    goalKeeperAdhocBonus,
-                    goalKeeperSavingBonus
-            )) {
+            if (isGoalFromBigChance(playerAndChance.player(), goalKeeperSavingBonus)) {
 
                 log.debug("simulateChance - GOAL from big chance: {}", playerAndChance.player().getName());
 
@@ -95,12 +90,7 @@ public class GoalSimulationService {
                 );
             }
         } else {
-            if (isGoalFromSmallChance(
-                    playerAndChance.player(),
-                    forwardAdhocBonus,
-                    goalKeeperAdhocBonus,
-                    goalKeeperSavingBonus
-            )) {
+            if (isGoalFromSmallChance(playerAndChance.player(), goalKeeperSavingBonus)) {
 
                 log.debug("simulateChance - GOAL from small chance: {}", playerAndChance.player().getName());
 
@@ -122,24 +112,26 @@ public class GoalSimulationService {
     @Nonnull
     private Boolean isGoalFromBigChance(
             @Nonnull SimulatedStarterPlayer player,
-            @Nonnull Double attackerAdhocBonus,
-            @Nonnull Double goalkeeperAdhocBonus,
             @Nonnull Double goalkeeperSavingBonus
     ) {
 
+        // TODO small chances now seem quite OK in the short tests
+        // big chances can be further nerfed a bit if i manage to create a bigger gap between them (like 5-0, 6-1, 4-1)
+
         // var bigChanceValue = player.getBigChanceFinishing() * 0.45;
-        var bigChanceValue = player.getBigChanceFinishing();
+        var bigChanceValue = player.getBigChanceFinishing() * 0.8;
         var fatigueValue = 1.0 - ((100 - player.getEnergy()) * 0.00375);
         var positionPenalty = getPossibleOutOfPositionPenalty(player);
+        var optimizedGoalkeeperSavingValue = 1.0 - (goalkeeperSavingBonus / 2.5);
+        var attackerAdhocBonus = 1.0 + (Math.random() / 20);
+        var goalkeeperAdhocBonus = 1.0 - (Math.random() / 20);
 
-        var result = (
-                bigChanceValue
-                        * fatigueValue
-                        * positionPenalty
-                        * goalkeeperSavingBonus
-        )
-                + attackerAdhocBonus
-                - goalkeeperAdhocBonus;
+        var result = bigChanceValue
+                * fatigueValue
+                * positionPenalty
+                * optimizedGoalkeeperSavingValue
+                * attackerAdhocBonus
+                * goalkeeperAdhocBonus;
 
         var random = Math.random();
 
@@ -147,7 +139,7 @@ public class GoalSimulationService {
         log.debug("isGoalFromBigChance - bigChanceValue: {}", bigChanceValue);
         log.debug("isGoalFromBigChance - fatigueValue: {}", fatigueValue);
         log.debug("isGoalFromBigChance - positionPenalty: {}", positionPenalty);
-        log.debug("isGoalFromBigChance - goalkeeperSavingBonus2: {}", goalkeeperSavingBonus);
+        log.debug("isGoalFromBigChance - optimizedGoalkeeperSavingValue: {}", optimizedGoalkeeperSavingValue);
         log.debug("isGoalFromBigChance - attackerAdhocBonus2: {}", attackerAdhocBonus);
         log.debug("isGoalFromBigChance - goalkeeperAdhocBonus2: {}", goalkeeperAdhocBonus);
         log.debug("isGoalFromBigChance - result: {}", result);
@@ -160,24 +152,23 @@ public class GoalSimulationService {
     @Nonnull
     private Boolean isGoalFromSmallChance(
             @Nonnull SimulatedStarterPlayer player,
-            @Nonnull Double attackerAdhocBonus,
-            @Nonnull Double goalkeeperAdhocBonus,
             @Nonnull Double goalkeeperSavingBonus
     ) {
 
         // var smallChanceValue = player.getSmallChanceFinishing() * 0.06;
-        var smallChanceValue = player.getSmallChanceFinishing() * 0.35;
+        var smallChanceValue = player.getSmallChanceFinishing() * 0.12;
         var fatigueValue = 1.0 - ((100 - player.getEnergy()) * 0.00375);
         var positionPenalty = getPossibleOutOfPositionPenalty(player);
+        var optimizedGoalkeeperSavingBonus = 1.0 - (goalkeeperSavingBonus / 1.5);
+        var goalkeeperAdhocBonus = 1.0 - (Math.random() / 25);
+        var attackerAdhocBonus = 1.0 + (Math.random() / 25);
 
-        var result = (
-                smallChanceValue
-                        * fatigueValue
-                        * positionPenalty
-                        * goalkeeperSavingBonus
-        )
-                + attackerAdhocBonus
-                - goalkeeperAdhocBonus;
+        var result = smallChanceValue
+                * fatigueValue
+                * positionPenalty
+                * optimizedGoalkeeperSavingBonus
+                * attackerAdhocBonus
+                * goalkeeperAdhocBonus;
 
         var random = Math.random();
 
@@ -187,7 +178,7 @@ public class GoalSimulationService {
         log.debug("isGoalFromSmallChance - positionPenalty: {}", positionPenalty);
         log.debug("isGoalFromSmallChance - attackerAdhocBonus: {}", attackerAdhocBonus);
         log.debug("isGoalFromSmallChance - goalkeeperAdhocBonus: {}", goalkeeperAdhocBonus);
-        log.debug("isGoalFromSmallChance - goalkeeperSavingBonus: {}", goalkeeperSavingBonus);
+        log.debug("isGoalFromSmallChance - optimizedGoalkeeperSavingBonus: {}", optimizedGoalkeeperSavingBonus);
         log.debug("isGoalFromSmallChance - result: {}", result);
         log.debug("isGoalFromSmallChance - random: {}", random);
         log.debug("------------------------------------------------------------------------------------------------");
