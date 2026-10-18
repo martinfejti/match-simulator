@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimulatedPlayerMapper {
 
+    // TODO chance value correction
+    // big chance - CB - (0.6 x heading) + (0.4 finishing)
+    // small chance - CB - (0.6 x shot power) + (0.4 x long shot)
+
+    // big chance - fullback - (0.6 x finishing) + (0.4 x shot power)
+    // small chance - fullback - (0.6 x long shot) + (0.4 x shot power)
+
     @Nonnull
     public SimulatedStarterPlayer map(@Nonnull Player squadPlayer, @Nonnull Lineup starterPlayer) {
         return new SimulatedStarterPlayer(

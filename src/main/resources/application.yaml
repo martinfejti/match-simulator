@@ -6,7 +6,7 @@ spring:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
   mvc:
     view:
       prefix: /WEB-INF/jsp/

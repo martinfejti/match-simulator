@@ -1,16 +1,18 @@
 package hu.martinez.matchsimulator.career.simulation.matchevent.chance;
 
+import hu.martinez.matchsimulator.career.simulation.matchevent.PositionCheckerService;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationFixtureDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.PreSimulationTeamDataContainer;
 import hu.martinez.matchsimulator.career.simulation.presimulation.SimulatedStarterPlayer;
 import jakarta.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Log4j2
+@RequiredArgsConstructor
 @Service
 public class ChanceCalculatorService {
 
@@ -21,6 +23,8 @@ public class ChanceCalculatorService {
     // Hazai pálya szorzók (Multiplikatív zárt modell)
     private static final double HOME_ADVANTAGE_MULT = 1.10; // +10%
     private static final double AWAY_HANDICAP_MULT = 0.90;  // -10%
+
+    private final PositionCheckerService positionCheckerService;
 
     @Nonnull
     public ChanceContainer calculateChancesV2(
@@ -154,8 +158,12 @@ public class ChanceCalculatorService {
 
         // position
         if (!starterPlayer.getPosition().equals(starterPlayer.getPrimaryPosition())) {
-            if (isPlayingInSecondaryPosition(starterPlayer.getPosition(), starterPlayer.getOtherPositions())) {
+            if (positionCheckerService.isPlayingInSecondaryPosition(
+                    starterPlayer.getPosition(), starterPlayer.getOtherPositions())) {
                 multiplier *= 0.98; // player is in a secondary position
+            } else if (positionCheckerService.isPlayingInRelatedPosition(
+                    starterPlayer.getPosition(), starterPlayer.getPrimaryPosition())) {
+                multiplier *= 0.95; // player is in a related position
             } else {
                 multiplier *= 0.9; // player is in an unfamiliar position
             }
@@ -212,15 +220,6 @@ public class ChanceCalculatorService {
             Double smallChanceMultiplier,
             Double bigChanceMultiplier
     ) {
-    }
-
-    @Nonnull
-    private Boolean isPlayingInSecondaryPosition(@Nonnull String currentPosition, @Nonnull String otherPositions) {
-
-        var otherPositionList = Arrays.stream(otherPositions.split(","))
-                .toList();
-
-        return otherPositionList.contains(currentPosition);
     }
 
 }
